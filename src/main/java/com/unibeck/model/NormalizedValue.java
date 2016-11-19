@@ -1,4 +1,4 @@
-package model;
+package com.unibeck.model;
 
 /**
  * Created by jbeckman on 11/16/16.

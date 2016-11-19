@@ -1,1 +1,7 @@
-/.idea
+# Gradle
+/gradle
+/.gradle
+/build
+
+# Intellij Configs
+.idea/
