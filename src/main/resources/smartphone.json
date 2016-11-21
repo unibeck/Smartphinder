@@ -40,7 +40,7 @@
     "brand": "Apple",
     "price": "45",
     "size": "3.5",
-    "resolution": "330",
+    "resolution": "326",
     "battery": "1420",
     "ram": "0.512",
     "storage": "8",
@@ -52,7 +52,7 @@
     "brand": "Apple",
     "price": "85",
     "size": "3.5",
-    "resolution": "330",
+    "resolution": "326",
     "battery": "1432",
     "ram": "0.512",
     "storage": "64",
@@ -64,6 +64,7 @@
     "brand": "Apple",
     "price": "105",
     "size": "4.0",
+    "resolution": "326",
     "battery": "1440",
     "ram": "1",
     "storage": "64",
@@ -296,7 +297,7 @@
     "ram": "3",
     "storage": "128",
     "os": "Android",
-    "primary": "12.3"
+    "primary": "12"
   },
   {
     "device-name": "Samsung Galaxy S II",
