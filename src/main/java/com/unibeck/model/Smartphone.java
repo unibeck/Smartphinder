@@ -180,16 +180,17 @@ public class Smartphone {
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + brand.hashCode();
-        result = 31 * result + operatingSystem.hashCode();
-        result = 31 * result + price.hashCode();
-        result = 31 * result + displaySize.hashCode();
-        result = 31 * result + displayResolution.hashCode();
-        result = 31 * result + ram.hashCode();
-        result = 31 * result + storage.hashCode();
-        result = 31 * result + batterySize.hashCode();
-        result = 31 * result + backCameraSensor.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (brand != null ? brand.hashCode() : 0);
+        result = 31 * result + (operatingSystem != null ? operatingSystem.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (displaySize != null ? displaySize.hashCode() : 0);
+        result = 31 * result + (displayResolution != null ? displayResolution.hashCode() : 0);
+        result = 31 * result + (ram != null ? ram.hashCode() : 0);
+        result = 31 * result + (storage != null ? storage.hashCode() : 0);
+        result = 31 * result + (batterySize != null ? batterySize.hashCode() : 0);
+        result = 31 * result + (backCameraSensor != null ? backCameraSensor.hashCode() : 0);
         return result;
     }
 }

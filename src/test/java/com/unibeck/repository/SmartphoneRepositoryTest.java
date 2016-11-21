@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class SmartphoneRepositoryTest {
 
     @Autowired

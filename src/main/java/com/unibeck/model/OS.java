@@ -21,6 +21,7 @@ public enum OS {
                 return os;
             }
         }
-        return null;
+
+        throw new IllegalArgumentException(abbr);
     }
 }

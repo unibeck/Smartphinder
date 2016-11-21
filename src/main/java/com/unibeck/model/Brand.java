@@ -7,6 +7,7 @@ public enum Brand {
     APPLE("Apple"),
     GOOGLE("Google"),
     HTC("HTC"),
+    HUAWEI("Huawei"),
     SAMSUNG("Samsung"),
     LG("LG"),
     NOKIA("Nokia"),
@@ -25,6 +26,7 @@ public enum Brand {
                 return b;
             }
         }
-        return null;
+
+        throw new IllegalArgumentException(abbr);
     }
 }

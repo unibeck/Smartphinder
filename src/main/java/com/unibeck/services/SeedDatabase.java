@@ -40,17 +40,23 @@ public class SeedDatabase {
         for (Object obj : arr) {
             JSONObject p = (JSONObject) obj;
 
-            newPhone = new Smartphone()
-                    .withName((String) p.get("device-name"))
-                    .withBrand(Brand.findByAbbr((String) p.get("brand")))
-                    .withOperatingSystem(OS.findByAbbr((String) p.get("os")))
-                    .withPrice(convertFromWithInt(Integer.valueOf((String) p.get("price")), pricePercentile))
-                    .withDisplaySize(convertFromWithDouble(Double.valueOf((String) p.get("size")), displaySizePercentile))
-                    .withDisplayResolution(convertFromWithInt(Integer.valueOf((String) p.get("resolution")), displayResolutionPercentile))
-                    .withRam(convertFromWithDouble(Double.valueOf((String) p.get("ram")), ramPercentile))
-                    .withStorage(convertFromWithInt(Integer.valueOf((String) p.get("storage")), storagePercentile))
-                    .withBatterySize(convertFromWithInt(Integer.valueOf((String) p.get("battery")), batterySizePercentile))
-                    .withBackCameraSensor(convertFromWithInt(Integer.valueOf((String) p.get("primary")), backCameraSensorPercentile));
+            try {
+                newPhone = new Smartphone()
+                        .withName((String) p.get("device-name"))
+                        .withBrand(Brand.findByAbbr((String) p.get("brand")))
+                        .withOperatingSystem(OS.findByAbbr((String) p.get("os")))
+                        .withPrice(convertFromWithInt(Integer.valueOf((String) p.get("price")), pricePercentile))
+                        .withDisplaySize(convertFromWithDouble(Double.valueOf((String) p.get("size")), displaySizePercentile))
+                        .withDisplayResolution(convertFromWithInt(Integer.valueOf((String) p.get("resolution")), displayResolutionPercentile))
+                        .withRam(convertFromWithDouble(Double.valueOf((String) p.get("ram")), ramPercentile))
+                        .withStorage(convertFromWithInt(Integer.valueOf((String) p.get("storage")), storagePercentile))
+                        .withBatterySize(convertFromWithInt(Integer.valueOf((String) p.get("battery")), batterySizePercentile))
+                        .withBackCameraSensor(convertFromWithInt(Integer.valueOf((String) p.get("primary")), backCameraSensorPercentile));
+
+            } catch (Exception e){
+                System.out.println(p.toJSONString());
+                throw e;
+            }
 
             smartphoneRepository.save(newPhone);
         }
