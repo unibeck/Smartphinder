@@ -3,7 +3,7 @@ package com.unibeck.model;
 /**
  * Created by jbeckman on 11/16/16.
  */
-public enum NormalizedValue {
+public enum NormalizedValue implements Comparable<NormalizedValue> {
     ONE(1),
     TWO(2),
     THREE(3),
