@@ -52,15 +52,15 @@ public class SmartphoneService {
         try {
             if(price.compareTo(NormalizedValue.THREE) < 0) {
                 //So if price is of magnitude ONE or TWO
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("primary"), NormalizedValue.TWO));
+                constraints.add(new Constraint(Smartphone.class.getDeclaredField("camera"), NormalizedValue.TWO));
             } else {
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("primary"), NormalizedValue.FIVE));
+                constraints.add(new Constraint(Smartphone.class.getDeclaredField("camera"), NormalizedValue.FIVE));
             }
 
             if(battery.compareTo(NormalizedValue.THREE) < 0) {
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("screenSize"), NormalizedValue.TWO));
+                constraints.add(new Constraint(Smartphone.class.getDeclaredField("displaySize"), NormalizedValue.TWO));
             } else {
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("screenSize"), NormalizedValue.FIVE));
+                constraints.add(new Constraint(Smartphone.class.getDeclaredField("displaySize"), NormalizedValue.FIVE));
             }
 
             //TODO: Add more constraints, but let's test these two first

@@ -399,11 +399,10 @@
         var settings = {
          "async": true,
          "crossDomain": true,
-         "url": "/smartphone/preferences",
+         "url": "/smartphone/constraint",
          "method": "POST",
-         "headers": {
-           "response": response,
-          }
+         "contentType": 'application/json',
+         "data": JSON.stringify(response)
          };
 
       
