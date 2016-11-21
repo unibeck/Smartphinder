@@ -22,7 +22,7 @@ public class UserConstraint {
     private int camera;
 
     @JsonProperty("ram")
-    private int ram;
+    private double ram;
 
     @JsonProperty("storage")
     private int storage;
@@ -31,9 +31,9 @@ public class UserConstraint {
     private int resolution;
 
     @JsonProperty("screen-size")
-    private int screenSize;
+    private double screenSize;
 
-    public UserConstraint(Brand brand, OS operatingSystem, int price, int battery, int camera, int ram, int storage, int resolution, int screenSize) {
+    public UserConstraint(Brand brand, OS operatingSystem, int price, int battery, int camera, double ram, int storage, int resolution, double screenSize) {
         this.brand = brand;
         this.operatingSystem = operatingSystem;
         this.price = price;
@@ -85,11 +85,11 @@ public class UserConstraint {
         this.camera = camera;
     }
 
-    public int getRam() {
+    public double getRam() {
         return ram;
     }
 
-    public void setRam(int ram) {
+    public void setRam(double ram) {
         this.ram = ram;
     }
 
@@ -109,11 +109,11 @@ public class UserConstraint {
         this.resolution = resolution;
     }
 
-    public int getScreenSize() {
+    public double getScreenSize() {
         return screenSize;
     }
 
-    public void setScreenSize(int screenSize) {
+    public void setScreenSize(double screenSize) {
         this.screenSize = screenSize;
     }
 
@@ -127,25 +127,29 @@ public class UserConstraint {
         if (price != that.price) return false;
         if (battery != that.battery) return false;
         if (camera != that.camera) return false;
-        if (ram != that.ram) return false;
+        if (Double.compare(that.ram, ram) != 0) return false;
         if (storage != that.storage) return false;
         if (resolution != that.resolution) return false;
-        if (screenSize != that.screenSize) return false;
+        if (Double.compare(that.screenSize, screenSize) != 0) return false;
         if (brand != that.brand) return false;
         return operatingSystem == that.operatingSystem;
     }
 
     @Override
     public int hashCode() {
-        int result = brand != null ? brand.hashCode() : 0;
+        int result;
+        long temp;
+        result = brand != null ? brand.hashCode() : 0;
         result = 31 * result + (operatingSystem != null ? operatingSystem.hashCode() : 0);
         result = 31 * result + price;
         result = 31 * result + battery;
         result = 31 * result + camera;
-        result = 31 * result + ram;
+        temp = Double.doubleToLongBits(ram);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + storage;
         result = 31 * result + resolution;
-        result = 31 * result + screenSize;
+        temp = Double.doubleToLongBits(screenSize);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 }
