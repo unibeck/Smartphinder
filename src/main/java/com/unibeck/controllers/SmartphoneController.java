@@ -29,7 +29,7 @@ public class SmartphoneController {
 		return smartphoneService.findClosestMatching(optimalSmartphone);
 	}
 
-	@RequestMapping(value = "/smartphone/preferences", method = RequestMethod.GET)
+	@RequestMapping(value = "/smartphones", method = RequestMethod.GET)
 	@ResponseStatus(value=HttpStatus.OK)
 	public List<Smartphone> getAllSmartphones() {
 		return smartphoneService.getAllSmartphones();
