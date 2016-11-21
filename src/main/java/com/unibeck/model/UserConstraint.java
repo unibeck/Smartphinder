@@ -33,6 +33,8 @@ public class UserConstraint {
     @JsonProperty("display-size")
     private double displaySize;
 
+    public UserConstraint() {};
+
     public UserConstraint(Brand brand, OS operatingSystem, int price, int battery, int camera, double ram, int storage, int resolution, double displaySize) {
         this.brand = brand;
         this.operatingSystem = operatingSystem;
