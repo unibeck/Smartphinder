@@ -1,4 +1,4 @@
-package com.unibeck.services;
+package com.unibeck;
 
 import com.unibeck.model.Brand;
 import com.unibeck.model.NormalizedValue;
