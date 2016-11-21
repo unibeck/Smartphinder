@@ -2,6 +2,7 @@ package com.unibeck.controller;
 
 
 import com.unibeck.controllers.SmartphoneController;
+import com.unibeck.model.Brand;
 import com.unibeck.model.NormalizedValue;
 import com.unibeck.model.OS;
 import com.unibeck.model.Smartphone;
@@ -41,9 +42,7 @@ public class SmartphoneControllerTest {
     double[] ramPercentile = {1.0, 2.0, 3.0, 4.0, 5.0};
     int[] storagePercentile = {16, 32, 64, 128, 256};
     int[] batterySizePercentile = {1500, 2250, 3000, 3750, 4500};
-    int[] batteryEndurancePercentile = {55, 60, 65, 70, 75};
     int[] backCameraSensorPercentile = {5, 8, 10, 12, 16};
-    double[] frontCameraSensorPercentile = {1.3, 2.1, 5.0, 8.0, 8.7};
 
     @Before
     public void setItUp() {
@@ -60,26 +59,15 @@ public class SmartphoneControllerTest {
 
         Smartphone iPhone4 = new Smartphone()
                 .withName("iPhone 4")
-                .withOperatingSystem(OS.APPLE)
+                .withBrand(Brand.APPLE)
+                .withOperatingSystem(OS.iOS)
                 .withPrice(convertFromWithInt(40, pricePercentile))
                 .withDisplaySize(convertFromWithDouble(3.5, displaySizePercentile))
                 .withDisplayResolution(convertFromWithInt(163, displayResolutionPercentile))
                 .withRam(convertFromWithDouble(0.256, ramPercentile))
                 .withStorage(convertFromWithInt(16, storagePercentile))
                 .withBatterySize(convertFromWithInt(1420, batterySizePercentile))
-                .withBackCameraSensor(convertFromWithInt(5, backCameraSensorPercentile))
-                .withFrontCameraSensor(convertFromWithDouble(1.3, frontCameraSensorPercentile));
-
-//        OkHttpClient client = new OkHttpClient();
-//
-//        String run(String url) throws IOException {
-//            Request request = new Request.Builder()
-//                    .url(url)
-//                    .build();
-//
-//            Response response = client.newCall(request).execute();
-//            return response.body().string();
-//        }
+                .withBackCameraSensor(convertFromWithInt(5, backCameraSensorPercentile));
 
         smartphoneRepository.save(iPhone4);
 
