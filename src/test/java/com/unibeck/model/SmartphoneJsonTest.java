@@ -13,8 +13,8 @@ import static org.junit.Assert.assertNotNull;
 public class SmartphoneJsonTest {
 
     private static final String IPHONE4 =
-            "{\"device-name\":\"iPhone 4\",\"brand\":\"APPLE\",\"os\":\"iOS\",\"price\":\"ONE\",\"size\":\"ONE\","+
-            "\"resolution\":\"ONE\",\"ram\":\"ONE\",\"storage\":\"ONE\",\"battery\":\"TWO\",\"primary\":\"ONE\"}";
+            "{\"device-name\":\"iPhone 4\",\"brand\":\"APPLE\",\"os\":\"iOS\",\"price\":\"ONE\",\"display-size\":\"ONE\","+
+            "\"resolution\":\"ONE\",\"ram\":\"ONE\",\"storage\":\"ONE\",\"battery\":\"TWO\",\"camera\":\"ONE\"}";
 
     @Test
     public void basicSerializationWorks() throws JsonProcessingException {
@@ -27,8 +27,8 @@ public class SmartphoneJsonTest {
                 .withDisplayResolution(NormalizedValue.ONE)
                 .withRam(NormalizedValue.ONE)
                 .withStorage(NormalizedValue.ONE)
-                .withBatterySize(NormalizedValue.TWO)
-                .withBackCameraSensor(NormalizedValue.ONE);
+                .withBattery(NormalizedValue.TWO)
+                .withCamera(NormalizedValue.ONE);
 
         String serialized = new ObjectMapper().writeValueAsString(iPhone4);
 
@@ -46,8 +46,8 @@ public class SmartphoneJsonTest {
                 .withDisplayResolution(NormalizedValue.ONE)
                 .withRam(NormalizedValue.ONE)
                 .withStorage(NormalizedValue.ONE)
-                .withBatterySize(NormalizedValue.TWO)
-                .withBackCameraSensor(NormalizedValue.ONE);
+                .withBattery(NormalizedValue.TWO)
+                .withCamera(NormalizedValue.ONE);
 
         //Convert JSON to Smartphone object
         Smartphone iPhone4Duplicate = new ObjectMapper().reader().forType(Smartphone.class).readValue(IPHONE4);

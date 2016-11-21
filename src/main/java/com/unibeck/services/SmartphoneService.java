@@ -5,8 +5,6 @@ import com.unibeck.repository.SmartphoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +41,12 @@ public class SmartphoneService {
     private List<Constraint> buildConstraints(UserConstraint userConstraint) {
         Percentiles per = new Percentiles();
         NormalizedValue price = convertFromWithInt(userConstraint.getPrice(), per.getPricePercentile());
-        NormalizedValue battery = convertFromWithInt(userConstraint.getBattery(), per.getBatterySizePercentile());
-        NormalizedValue camera = convertFromWithInt(userConstraint.getCamera(), per.getBackCameraSensorPercentile());
+        NormalizedValue battery = convertFromWithInt(userConstraint.getBattery(), per.getBatteryPercentile());
+        NormalizedValue camera = convertFromWithInt(userConstraint.getCamera(), per.getCameraPercentile());
         NormalizedValue ram = convertFromWithDouble(userConstraint.getRam(), per.getRamPercentile());
         NormalizedValue storage = convertFromWithInt(userConstraint.getStorage(), per.getStoragePercentile());
         NormalizedValue resolution = convertFromWithInt(userConstraint.getResolution(), per.getDisplayResolutionPercentile());
-        NormalizedValue screenSize = convertFromWithDouble(userConstraint.getScreenSize(), per.getDisplaySizePercentile());
+        NormalizedValue displaySize = convertFromWithDouble(userConstraint.getDisplaySize(), per.getDisplaySizePercentile());
 
         List<Constraint> constraints = new ArrayList<>();
         try {

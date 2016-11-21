@@ -30,10 +30,10 @@ public class UserConstraint {
     @JsonProperty("resolution")
     private int resolution;
 
-    @JsonProperty("screen-size")
-    private double screenSize;
+    @JsonProperty("display-size")
+    private double displaySize;
 
-    public UserConstraint(Brand brand, OS operatingSystem, int price, int battery, int camera, double ram, int storage, int resolution, double screenSize) {
+    public UserConstraint(Brand brand, OS operatingSystem, int price, int battery, int camera, double ram, int storage, int resolution, double displaySize) {
         this.brand = brand;
         this.operatingSystem = operatingSystem;
         this.price = price;
@@ -42,7 +42,7 @@ public class UserConstraint {
         this.ram = ram;
         this.storage = storage;
         this.resolution = resolution;
-        this.screenSize = screenSize;
+        this.displaySize = displaySize;
     }
 
     public Brand getBrand() {
@@ -109,12 +109,12 @@ public class UserConstraint {
         this.resolution = resolution;
     }
 
-    public double getScreenSize() {
-        return screenSize;
+    public double getDisplaySize() {
+        return displaySize;
     }
 
-    public void setScreenSize(double screenSize) {
-        this.screenSize = screenSize;
+    public void setDisplaySize(double displaySize) {
+        this.displaySize = displaySize;
     }
 
     @Override
@@ -130,7 +130,7 @@ public class UserConstraint {
         if (Double.compare(that.ram, ram) != 0) return false;
         if (storage != that.storage) return false;
         if (resolution != that.resolution) return false;
-        if (Double.compare(that.screenSize, screenSize) != 0) return false;
+        if (Double.compare(that.displaySize, displaySize) != 0) return false;
         if (brand != that.brand) return false;
         return operatingSystem == that.operatingSystem;
     }
@@ -148,7 +148,7 @@ public class UserConstraint {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + storage;
         result = 31 * result + resolution;
-        temp = Double.doubleToLongBits(screenSize);
+        temp = Double.doubleToLongBits(displaySize);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

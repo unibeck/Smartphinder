@@ -3,516 +3,516 @@
     "device-name": "Apple iPhone",
     "brand": "Apple",
     "price": "3",
-    "size": "3.5",
+    "display-size": "3.5",
     "resolution": "165",
     "battery": "1400",
     "ram": "0.128",
     "storage": "8",
     "os": "iOS",
-    "primary": "2"
+    "camera": "2"
   },
   {
     "device-name": "Apple iPhone 3G",
     "brand": "Apple",
     "price": "3",
-    "size": "3.5",
+    "display-size": "3.5",
     "resolution": "165",
     "battery": "1150",
     "ram": "0.128",
     "storage": "8",
     "os": "iOS",
-    "primary": "2"
+    "camera": "2"
   },
   {
     "device-name": "Apple iPhone 3GS",
     "brand": "Apple",
     "price": "8",
-    "size": "3.5",
+    "display-size": "3.5",
     "resolution": "165",
     "battery": "1220",
     "ram": "0.256",
     "storage": "8",
     "os": "iOS",
-    "primary": "3"
+    "camera": "3"
   },
   {
     "device-name": "Apple iPhone 4",
     "brand": "Apple",
     "price": "45",
-    "size": "3.5",
+    "display-size": "3.5",
     "resolution": "326",
     "battery": "1420",
     "ram": "0.512",
     "storage": "8",
     "os": "iOS",
-    "primary": "5"
+    "camera": "5"
   },
   {
     "device-name": "Apple iPhone 4s",
     "brand": "Apple",
     "price": "85",
-    "size": "3.5",
+    "display-size": "3.5",
     "resolution": "326",
     "battery": "1432",
     "ram": "0.512",
     "storage": "64",
     "os": "iOS",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Apple iPhone 5",
     "brand": "Apple",
     "price": "105",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "326",
     "battery": "1440",
     "ram": "1",
     "storage": "64",
     "os": "iOS",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Apple iPhone 5s",
     "brand": "Apple",
     "price": "180",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "326",
     "battery": "1560",
     "ram": "1",
     "storage": "64",
     "os": "iOS",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Apple iPhone 5c",
     "brand": "Apple",
     "price": "95",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "326",
     "battery": "1510",
     "ram": "1",
     "storage": "8",
     "os": "iOS",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Apple iPhone 6",
     "brand": "Apple",
     "price": "490",
-    "size": "4.7",
+    "display-size": "4.7",
     "resolution": "326",
     "battery": "1810",
     "ram": "1",
     "storage": "128",
     "os": "iOS",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Apple iPhone 6 Plus",
     "brand": "Apple",
     "price": "510",
-    "size": "5.5",
+    "display-size": "5.5",
     "resolution": "401",
     "battery": "2915",
     "ram": "1",
     "storage": "128",
     "os": "iOS",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Apple iPhone 6s",
     "brand": "Apple",
     "price": "550",
-    "size": "4.7",
+    "display-size": "4.7",
     "resolution": "326",
     "battery": "1715",
     "ram": "2",
     "storage": "128",
     "os": "iOS",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Apple iPhone 6s Plus",
     "brand": "Apple",
     "price": "590",
-    "size": "5.5",
+    "display-size": "5.5",
     "resolution": "401",
     "battery": "2750",
     "ram": "2",
     "storage": "128",
     "os": "iOS",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Apple iPhone SE",
     "brand": "Apple",
     "price": "425",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "326",
     "battery": "1624",
     "ram": "2",
     "storage": "64",
     "os": "iOS",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Apple iPhone 7 Plus",
     "brand": "Apple",
     "price": "750",
-    "size": "5.5",
+    "display-size": "5.5",
     "resolution": "401",
     "battery": "2900",
     "ram": "3",
     "storage": "256",
     "os": "iOS",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Apple iPhone 7",
     "brand": "Apple",
     "price": "650",
-    "size": "4.7",
+    "display-size": "4.7",
     "resolution": "326",
     "battery": "1960",
     "ram": "2",
     "storage": "256",
     "os": "iOS",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Microsoft Lumia 535",
     "brand": "Microsoft",
     "price": "115",
-    "size": "5.0",
+    "display-size": "5.0",
     "resolution": "220",
     "battery": "1905",
     "ram": "1",
     "storage": "8",
     "os": "Windows Phone 8",
-    "primary": "5"
+    "camera": "5"
   },
   {
     "device-name": "Microsoft Lumia 435",
     "brand": "Microsoft",
     "price": "45",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "233",
     "battery": "1560",
     "ram": "1",
     "storage": "8",
     "os": "Windows Phone 8",
-    "primary": "2"
+    "camera": "2"
   },
   {
     "device-name": "Microsoft Lumia 532",
     "brand": "Microsoft",
     "price": "70",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "233",
     "battery": "1560",
     "ram": "1",
     "storage": "8",
     "os": "Windows Phone 8",
-    "primary": "5"
+    "camera": "5"
   },
   {
     "device-name": "Microsoft Lumia 640 LTE",
     "brand": "Microsoft",
     "price": "70",
-    "size": "5.0",
+    "display-size": "5.0",
     "resolution": "294",
     "battery": "2500",
     "ram": "1",
     "storage": "8",
     "os": "Windows Phone 8",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Microsoft Lumia 640 XL",
     "brand": "Microsoft",
     "price": "100",
-    "size": "5.7",
+    "display-size": "5.7",
     "resolution": "259",
     "battery": "3000",
     "ram": "1",
     "storage": "8",
     "os": "Windows Phone 8",
-    "primary": "13"
+    "camera": "13"
   },
   {
     "device-name": "Microsoft Lumia 950",
     "brand": "Microsoft",
     "price": "265",
-    "size": "5.2",
+    "display-size": "5.2",
     "resolution": "564",
     "battery": "3000",
     "ram": "3",
     "storage": "32",
     "os": "Windows 10 Mobile",
-    "primary": "20"
+    "camera": "20"
   },
   {
     "device-name": "Microsoft Lumia 950 XL",
     "brand": "Microsoft",
     "price": "380",
-    "size": "5.7",
+    "display-size": "5.7",
     "resolution": "518",
     "battery": "3340",
     "ram": "3",
     "storage": "32",
     "os": "Windows 10 Mobile",
-    "primary": "20"
+    "camera": "20"
   },
   {
     "device-name": "Microsoft Lumia 550",
     "brand": "Microsoft",
     "price": "98",
-    "size": "4.7",
+    "display-size": "4.7",
     "resolution": "315",
     "battery": "2100",
     "ram": "1",
     "storage": "8",
     "os": "Windows 10 Mobile",
-    "primary": "5"
+    "camera": "5"
   },
   {
     "device-name": "LG Nexus 5X",
     "brand": "LG",
     "price": "300",
-    "size": "5.2",
+    "display-size": "5.2",
     "resolution": "423",
     "battery": "2700",
     "ram": "2",
     "storage": "64",
     "os": "Android",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Huawei Nexus 6P",
     "brand": "Huawei",
     "price": "390",
-    "size": "5.7",
+    "display-size": "5.7",
     "resolution": "518",
     "battery": "3450",
     "ram": "3",
     "storage": "128",
     "os": "Android",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Samsung Galaxy S II",
     "brand": "Samsung",
     "price": "95",
-    "size": "4.5",
+    "display-size": "4.5",
     "resolution": "207",
     "battery": "1850",
     "ram": "1",
     "storage": "32",
     "os": "Android",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Samsung Galaxy S III",
     "brand": "Samsung",
     "price": "120",
-    "size": "4.8",
+    "display-size": "4.8",
     "resolution": "306",
     "battery": "2100",
     "ram": "2",
     "storage": "64",
     "os": "Android",
-    "primary": "8"
+    "camera": "8"
   },
   {
     "device-name": "Samsung Galaxy S Duos S7562",
     "brand": "Samsung",
     "price": "60",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "233",
     "battery": "1500",
     "ram": "0.768",
     "storage": "4",
     "os": "Android",
-    "primary": "5"
+    "camera": "5"
   },
   {
     "device-name": "Samsung Galaxy Stellar 4G I200",
     "brand": "Samsung",
     "price": "50",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "233",
     "battery": "2100",
     "ram": "1",
     "storage": "4",
     "os": "Android",
-    "primary": "3"
+    "camera": "3"
   },
   {
     "device-name": "Samsung Galaxy S4",
     "brand": "Samsung",
     "price": "150",
-    "size": "5.0",
+    "display-size": "5.0",
     "resolution": "441",
     "battery": "2600",
     "ram": "2",
     "storage": "16",
     "os": "Android",
-    "primary": "13"
+    "camera": "13"
   },
   {
     "device-name": "Samsung Galaxy S4 zoom",
     "brand": "Samsung",
     "price": "160",
-    "size": "4.3",
+    "display-size": "4.3",
     "resolution": "256",
     "battery": "2330",
     "ram": "1.5",
     "storage": "8",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy Star Pro S7260",
     "brand": "Samsung",
     "price": "45",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "233",
     "battery": "1500",
     "ram": "0.512",
     "storage": "4",
     "os": "Android",
-    "primary": "2"
+    "camera": "2"
   },
   {
     "device-name": "Samsung Galaxy S Duos 2 S7582",
     "brand": "Samsung",
     "price": "75",
-    "size": "4.0",
+    "display-size": "4.0",
     "resolution": "233",
     "battery": "1500",
     "ram": "0.768",
     "storage": "4",
     "os": "Android",
-    "primary": "5"
+    "camera": "5"
   },
   {
     "device-name": "Samsung Galaxy S4 Active",
     "brand": "Samsung",
     "price": "160",
-    "size": "5.0",
+    "display-size": "5.0",
     "resolution": "441",
     "battery": "2600",
     "ram": "2",
     "storage": "16",
     "os": "Android",
-    "primary": "13"
+    "camera": "13"
   },
   {
     "device-name": "Samsung Galaxy S5282",
     "brand": "Samsung",
     "price": "50",
-    "size": "3.14",
+    "display-size": "3.14",
     "resolution": "127",
     "battery": "1300",
     "ram": "0.512",
     "storage": "4",
     "os": "Android",
-    "primary": "2"
+    "camera": "2"
   },
   {
     "device-name": "Samsung Galaxy S5",
     "brand": "Samsung",
     "price": "220",
-    "size": "5.1",
+    "display-size": "5.1",
     "resolution": "432",
     "battery": "2800",
     "ram": "2",
     "storage": "32",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy S5 Active",
     "brand": "Samsung",
     "price": "230",
-    "size": "5.1",
+    "display-size": "5.1",
     "resolution": "432",
     "battery": "2800",
     "ram": "2",
     "storage": "32",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy S5 Sport",
     "brand": "Samsung",
     "price": "170",
-    "size": "5.1",
+    "display-size": "5.1",
     "resolution": "432",
     "battery": "2800",
     "ram": "2",
     "storage": "32",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy S6",
     "brand": "Samsung",
     "price": "360",
-    "size": "5.1",
+    "display-size": "5.1",
     "resolution": "577",
     "battery": "2550",
     "ram": "3",
     "storage": "128",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy S6 edge",
     "brand": "Samsung",
     "price": "400",
-    "size": "5.1",
+    "display-size": "5.1",
     "resolution": "577",
     "battery": "2600",
     "ram": "3",
     "storage": "128",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy S6 edge+",
     "brand": "Samsung",
     "price": "430",
-    "size": "5.7",
+    "display-size": "5.7",
     "resolution": "518",
     "battery": "3000",
     "ram": "4",
     "storage": "64",
     "os": "Android",
-    "primary": "16"
+    "camera": "16"
   },
   {
     "device-name": "Samsung Galaxy S7",
     "brand": "Samsung",
     "price": "540",
-    "size": "5.1",
+    "display-size": "5.1",
     "resolution": "576",
     "battery": "3000",
     "ram": "4",
     "storage": "128",
     "os": "Android",
-    "primary": "12"
+    "camera": "12"
   },
   {
     "device-name": "Samsung Galaxy S7 edge",
     "brand": "Samsung",
     "price": "595",
-    "size": "5.5",
+    "display-size": "5.5",
     "resolution": "534",
     "battery": "3600",
     "ram": "4",
     "storage": "128",
     "os": "Android",
-    "primary": "12"
+    "camera": "12"
   }
 ]

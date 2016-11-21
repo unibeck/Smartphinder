@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -66,8 +65,8 @@ public class SmartphoneControllerTest {
                 .withDisplayResolution(convertFromWithInt(163, displayResolutionPercentile))
                 .withRam(convertFromWithDouble(0.256, ramPercentile))
                 .withStorage(convertFromWithInt(16, storagePercentile))
-                .withBatterySize(convertFromWithInt(1420, batterySizePercentile))
-                .withBackCameraSensor(convertFromWithInt(5, backCameraSensorPercentile));
+                .withBattery(convertFromWithInt(1420, batterySizePercentile))
+                .withCamera(convertFromWithInt(5, backCameraSensorPercentile));
 
         smartphoneRepository.save(iPhone4);
 

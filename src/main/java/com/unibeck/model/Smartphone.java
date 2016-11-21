@@ -36,7 +36,7 @@ public class Smartphone {
     private NormalizedValue price;
 
     @NotNull
-    @JsonProperty("size")
+    @JsonProperty("display-size")
     private NormalizedValue displaySize;
 
     @NotNull
@@ -53,11 +53,11 @@ public class Smartphone {
 
     @NotNull
     @JsonProperty("battery")
-    private NormalizedValue batterySize;
+    private NormalizedValue battery;
 
     @NotNull
-    @JsonProperty("primary")
-    private NormalizedValue backCameraSensor;
+    @JsonProperty("camera")
+    private NormalizedValue camera;
 
     public Smartphone() {}
 
@@ -101,12 +101,12 @@ public class Smartphone {
         return storage;
     }
 
-    public NormalizedValue getBatterySize() {
-        return batterySize;
+    public NormalizedValue getBattery() {
+        return battery;
     }
 
-    public NormalizedValue getBackCameraSensor() {
-        return backCameraSensor;
+    public NormalizedValue getCamera() {
+        return camera;
     }
 
     public Smartphone withName(String name) {
@@ -149,13 +149,13 @@ public class Smartphone {
         return this;
     }
 
-    public Smartphone withBatterySize(NormalizedValue batterySize) {
-        this.batterySize = batterySize;
+    public Smartphone withBattery(NormalizedValue battery) {
+        this.battery = battery;
         return this;
     }
 
-    public Smartphone withBackCameraSensor(NormalizedValue backCameraSensor) {
-        this.backCameraSensor = backCameraSensor;
+    public Smartphone withCamera(NormalizedValue camera) {
+        this.camera = camera;
         return this;
     }
 
@@ -174,8 +174,8 @@ public class Smartphone {
         if (displayResolution != that.displayResolution) return false;
         if (ram != that.ram) return false;
         if (storage != that.storage) return false;
-        if (batterySize != that.batterySize) return false;
-        return backCameraSensor == that.backCameraSensor;
+        if (battery != that.battery) return false;
+        return camera == that.camera;
     }
 
     @Override
@@ -189,8 +189,8 @@ public class Smartphone {
         result = 31 * result + (displayResolution != null ? displayResolution.hashCode() : 0);
         result = 31 * result + (ram != null ? ram.hashCode() : 0);
         result = 31 * result + (storage != null ? storage.hashCode() : 0);
-        result = 31 * result + (batterySize != null ? batterySize.hashCode() : 0);
-        result = 31 * result + (backCameraSensor != null ? backCameraSensor.hashCode() : 0);
+        result = 31 * result + (battery != null ? battery.hashCode() : 0);
+        result = 31 * result + (camera != null ? camera.hashCode() : 0);
         return result;
     }
 }

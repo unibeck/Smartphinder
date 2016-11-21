@@ -42,7 +42,7 @@ public class SeedDatabase {
                         .withOperatingSystem(OS.findByAbbr((String) p.get("os")))
                         .withPrice(convertFromWithInt(Integer.valueOf((String) p.get("price")),
                                 per.getPricePercentile()))
-                        .withDisplaySize(convertFromWithDouble(Double.valueOf((String) p.get("size")),
+                        .withDisplaySize(convertFromWithDouble(Double.valueOf((String) p.get("display-size")),
                                 per.getDisplaySizePercentile()))
                         .withDisplayResolution(convertFromWithInt(Integer.valueOf((String) p.get("resolution")),
                                 per.getDisplayResolutionPercentile()))
@@ -50,10 +50,10 @@ public class SeedDatabase {
                                 per.getRamPercentile()))
                         .withStorage(convertFromWithInt(Integer.valueOf((String) p.get("storage")),
                                 per.getStoragePercentile()))
-                        .withBatterySize(convertFromWithInt(Integer.valueOf((String) p.get("battery")),
-                                per.getBatterySizePercentile()))
-                        .withBackCameraSensor(convertFromWithInt(Integer.valueOf((String) p.get("primary")),
-                                per.getBackCameraSensorPercentile()));
+                        .withBattery(convertFromWithInt(Integer.valueOf((String) p.get("battery")),
+                                per.getBatteryPercentile()))
+                        .withCamera(convertFromWithInt(Integer.valueOf((String) p.get("camera")),
+                                per.getCameraPercentile()));
 
             } catch (Exception e){
                 System.out.println(p.toJSONString());
