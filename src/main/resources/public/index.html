@@ -305,7 +305,7 @@
                                 <label for="sevenhundred">~$700</label>
                               </p>
                               <p>
-                                <input class="with-gap" name="group9" type="radio" id="othermoney" value=null/>
+                                <input class="with-gap" name="group9" type="radio" id="othermoney" value=""/>
                                 <label for="othermoney">Money in the bank ;)</label>
                               </p>
                             </form>
@@ -381,23 +381,20 @@
         if(price == "")
         {
           price = null;
-        }
-       
+        } 
         
         //filling up the JSON
         response.userresponse["brand"] = brand;
-        response.userresponse["screensize"] = screensize;
-        response.userresponse["screendensity"] = screendensity;
-        response.userresponse["battery"] = battery;
-        response.userresponse["ram"] = ram;
         response.userresponse["os"] = os;
-        response.userresponse["camera"] = camera;
-        response.userresponse["storage"] = storage;
         response.userresponse["price"] = price;
+        response.userresponse["battery"] = battery;
+        response.userresponse["camera"] = camera;
+        response.userresponse["ram"] = ram;
+        response.userresponse["storage"] = storage;
+        response.userresponse["resolution"] = screendensity;
+        response.userresponse["display-size"] = screensize;  
         
         console.log(response);
-        
-    
         
         var settings = {
          "async": true,
@@ -405,15 +402,7 @@
          "url": "/smartphone/preferences",
          "method": "POST",
          "headers": {
-           "brand": brand,
-           "screensize": screensize,
-           "screendensity": screendensity,
-           "battery": battery,
-           "ram": ram,
-           "os": os,
-           "camera": camera,
-           "storage": storage,
-           "price": price
+           "response": response,
           }
          };
 
