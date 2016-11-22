@@ -1,6 +1,9 @@
 package com.unibeck.repository;
 
 
+import com.unibeck.model.Brand;
+import com.unibeck.model.NormalizedValue;
+import com.unibeck.model.OS;
 import com.unibeck.model.Smartphone;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +16,19 @@ import java.util.List;
 @Repository
 public interface SmartphoneRepository extends PagingAndSortingRepository<Smartphone, String> {
     List<Smartphone> findAll();
+
+    List<Smartphone> findByOperatingSystem(OS os);
+    List<Smartphone> findByBrand(Brand brand);
+
+    List<Smartphone> findByPriceGreaterThan(NormalizedValue price);
+    List<Smartphone> findByPriceLessThan(NormalizedValue price);
+
+    List<Smartphone> findByCameraGreaterThan(NormalizedValue camera);
+    List<Smartphone> findByCameraLessThan(NormalizedValue camera);
+
+    List<Smartphone> findByDisplaySizeGreaterThan(NormalizedValue displaySize);
+    List<Smartphone> findByDisplaySizeLessThan(NormalizedValue displaySize);
+
+    List<Smartphone> findByRamGreaterThan(NormalizedValue ram);
+    List<Smartphone> findByRamLessThan(NormalizedValue ram);
 }

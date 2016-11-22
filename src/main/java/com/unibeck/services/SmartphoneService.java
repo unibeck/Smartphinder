@@ -29,16 +29,6 @@ public class SmartphoneService {
     }
 
     public List<Smartphone> findClosestMatching(UserConstraint userConstraint) {
-        List<Smartphone> closestSmartphones = new ArrayList<>();
-        List<Constraint> constraints = buildConstraints(userConstraint);
-
-        //TODO: create a constraint satisfaction algorithm here and find ~top 3 smartphones
-
-//        closestSmartphones.add(optimalSmartphone);
-        return closestSmartphones;
-    }
-
-    private List<Constraint> buildConstraints(UserConstraint userConstraint) {
         Percentiles per = new Percentiles();
         NormalizedValue price = convertFromWithInt(userConstraint.getPrice(), per.getPricePercentile());
         NormalizedValue battery = convertFromWithInt(userConstraint.getBattery(), per.getBatteryPercentile());
@@ -48,27 +38,38 @@ public class SmartphoneService {
         NormalizedValue resolution = convertFromWithInt(userConstraint.getResolution(), per.getDisplayResolutionPercentile());
         NormalizedValue displaySize = convertFromWithDouble(userConstraint.getDisplaySize(), per.getDisplaySizePercentile());
 
-        List<Constraint> constraints = new ArrayList<>();
-        try {
-            if(price.compareTo(NormalizedValue.THREE) < 0) {
-                //So if price is of magnitude ONE or TWO
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("camera"), NormalizedValue.TWO));
-            } else {
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("camera"), NormalizedValue.FIVE));
-            }
+        //Let's first filter out all other operating systems
+        List<Smartphone> remainder = smartphoneRepository.findAll();
+        List<Smartphone> reserve;
 
-            if(battery.compareTo(NormalizedValue.THREE) < 0) {
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("displaySize"), NormalizedValue.TWO));
-            } else {
-                constraints.add(new Constraint(Smartphone.class.getDeclaredField("displaySize"), NormalizedValue.FIVE));
-            }
-
-            //TODO: Add more constraints, but let's test these two first
-
-        } catch (NoSuchFieldException e) {
-            System.out.println("Could not find a declared field " + e);
+        /* Constraint 1:
+            If the brand is Apple, then ram can't be better than NormalizedValue.THREE
+        */
+        if(userConstraint.getBrand() == Brand.APPLE) {
+            reserve = smartphoneRepository.findByRamLessThan(NormalizedValue.FOUR);
+            remainder.retainAll(reserve);
         }
 
-        return constraints;
+        /* Constraint 2:
+            If price is in the lower 40 percentile, then the camera can't be better than NormalizedValue.TWO
+        */
+        if(price.compareTo(NormalizedValue.THREE) < 0) {
+            reserve = smartphoneRepository.findByCameraLessThan(NormalizedValue.THREE);
+            remainder.retainAll(reserve);
+        }
+
+        /* Constraint 3:
+            If the battery is in the lower 40 percentile, then the displaySize can't be better than NormalizedValue.TWO
+            If the battery is in the greater 60 percentile, then the displaySize must be better than NormalizedValue.TWO
+         */
+        if(battery.compareTo(NormalizedValue.THREE) < 0) {
+            reserve = smartphoneRepository.findByDisplaySizeLessThan(NormalizedValue.THREE);
+            remainder.retainAll(reserve);
+        } else {
+            reserve = smartphoneRepository.findByDisplaySizeGreaterThan(NormalizedValue.TWO);
+            remainder.retainAll(reserve);
+        }
+
+        return remainder;
     }
 }

@@ -1,5 +1,6 @@
 package com.unibeck.repository;
 
+import com.unibeck.SeedDatabase;
 import com.unibeck.model.Brand;
 import com.unibeck.model.NormalizedValue;
 import com.unibeck.model.OS;
@@ -61,4 +62,38 @@ public class SmartphoneRepositoryTest {
         smartphoneList = smartphoneRepository.findAll();
         assertEquals(1, smartphoneList.size());
     }
+
+    @Test
+    public void largerSmartphoneRepo() throws Exception {
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
+        seed.seedSmartphones();
+
+        assertEquals(43, smartphoneRepository.count());
+    }
+
+    @Test
+    public void filteringBySmartphoneFieldWorks() throws Exception {
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
+        seed.seedSmartphones();
+
+        //We can use this test to hone in on the percentile, one fifth of the repository should be the size of each percentile
+        //Thus this test should result in 17 smartphones from the first and second percentile
+        List<Smartphone> smartphoneList = smartphoneRepository.findByPriceLessThan(NormalizedValue.THREE);
+        assertEquals(18, smartphoneList.size());
+    }
 }
+
+// Alternatively, we can use this to determine the percentiles also
+//    long count = smartphoneRepository.count();
+//        for (int i = 0; i < 5; i++) {
+//        System.out.printf("The %dth percentile ends with ", i);
+//        Page<Smartphone> sp = smartphoneRepository.findAll(new PageRequest(i, (int) count/5, Sort.Direction.ASC, "price"));
+//
+//
+//        Iterator<Smartphone> itr = sp.iterator();
+//        Smartphone lastElement = itr.next();
+//        while(itr.hasNext()) {
+//        lastElement=itr.next();
+//        }
+//        System.out.printf("%s\n", lastElement.getPrice().toString());
+//        }
