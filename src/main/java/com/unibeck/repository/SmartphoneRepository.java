@@ -5,6 +5,7 @@ import com.unibeck.model.Brand;
 import com.unibeck.model.NormalizedValue;
 import com.unibeck.model.OS;
 import com.unibeck.model.Smartphone;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,10 @@ public interface SmartphoneRepository extends PagingAndSortingRepository<Smartph
     List<Smartphone> findAll();
 
     List<Smartphone> findByOperatingSystem(OS os);
+
     List<Smartphone> findByBrand(Brand brand);
+    @Query("select sp from Smartphone sp where sp.brand <> :brand")
+    List<Smartphone> findByBrandNot(Brand brand);
 
     List<Smartphone> findByPriceGreaterThan(NormalizedValue price);
     List<Smartphone> findByPriceLessThan(NormalizedValue price);
@@ -31,4 +35,7 @@ public interface SmartphoneRepository extends PagingAndSortingRepository<Smartph
 
     List<Smartphone> findByRamGreaterThan(NormalizedValue ram);
     List<Smartphone> findByRamLessThan(NormalizedValue ram);
+
+    List<Smartphone> findByBatteryGreaterThan(NormalizedValue ram);
+    List<Smartphone> findByBatteryLessThan(NormalizedValue ram);
 }
