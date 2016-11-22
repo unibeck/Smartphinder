@@ -14,7 +14,7 @@ public class Percentiles {
     private int[] cameraPercentile = new int[5];
 
     public Percentiles() {
-        pricePercentile = new int[]{399, 599, 799, 899, 1099};
+        pricePercentile = new int[]{79, 109, 249, 549, 699};
         displaySizePercentile = new double[]{4.0, 4.5, 5.0, 5.5, 6.0};
         displayResolutionPercentile = new int[]{250, 300, 350, 400, 450};
         ramPercentile = new double[]{1.0, 2.0, 3.0, 4.0, 5.0};

@@ -25,6 +25,10 @@ public class SeedDatabase {
 
     private Smartphone newPhone;
 
+    public SeedDatabase(SmartphoneRepository smartphoneRepository) {
+        this.smartphoneRepository = smartphoneRepository;
+    }
+
     @PostConstruct
     public void seedSmartphones() throws Exception {
         Percentiles per = new Percentiles();
