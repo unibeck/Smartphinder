@@ -556,12 +556,12 @@
   "device-name": "Huawei Ascend W1",
   "brand": "Huawei",
   "price": "245",
-  "display-size": "4",
+  "display-size": "4.0",
   "resolution": "233",
   "battery": "1950",
-  "ram": "512",
+  "ram": "0.512",
   "storage":"4",
-  "os": "Microsoft",
+  "os": "Windows Phone 8",
   "camera": "5"
 },
 {
@@ -574,7 +574,7 @@
   "ram": "0.512",
   "storage": "4",
   "os": "Android",
-  "camera": "3.15"
+  "camera": "3"
 },
 {
   "device-name": "Huawei Ascend G500",
@@ -583,7 +583,7 @@
   "display-size": "4.3",
   "resolution": "256",
   "battery": "1930",
-  "internal": "1",
+  "ram": "1",
   "storage":"4",
   "os": "Android",
   "camera": "5"
