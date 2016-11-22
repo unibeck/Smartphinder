@@ -59,10 +59,12 @@ public class SmartphoneServiceTest {
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-        //Constraint 1: 40 results left
-        //Constraint 2: 40 results left
-        //Constraint 3: 22 results left
+        //Constraint 1/2: 40 results left
+        //Constraint 3:   40 results left
+        //Constraint 4:   22 results left
+        //Constraint 5:   03 results left
+        //Constraint 6:   03 results left
         List<Smartphone> smartphoneList = smartphoneService.findClosestMatching(constraint);
-        assertEquals(22, smartphoneList.size());
+        assertEquals(3, smartphoneList.size());
     }
 }

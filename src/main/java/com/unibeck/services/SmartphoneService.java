@@ -38,35 +38,71 @@ public class SmartphoneService {
         NormalizedValue resolution = convertFromWithInt(userConstraint.getResolution(), per.getDisplayResolutionPercentile());
         NormalizedValue displaySize = convertFromWithDouble(userConstraint.getDisplaySize(), per.getDisplaySizePercentile());
 
-        //Let's first filter out all other operating systems
+
         List<Smartphone> remainder = smartphoneRepository.findAll();
         List<Smartphone> reserve;
 
-        /* Constraint 1:
+        /* Constraint 1/2:
             If the brand is Apple, then ram can't be better than NormalizedValue.THREE
+            AND the operatingSystem must be iOS
         */
         if(userConstraint.getBrand() == Brand.APPLE) {
             reserve = smartphoneRepository.findByRamLessThan(NormalizedValue.FOUR);
             remainder.retainAll(reserve);
+
+            reserve = smartphoneRepository.findByOperatingSystem(OS.iOS);
+            remainder.retainAll(reserve);
+        }
+        if(remainder.size() < 5) {
+            return remainder;
         }
 
-        /* Constraint 2:
+        /* Constraint 3:
             If price is in the lower 40 percentile, then the camera can't be better than NormalizedValue.TWO
         */
         if(price.compareTo(NormalizedValue.THREE) < 0) {
             reserve = smartphoneRepository.findByCameraLessThan(NormalizedValue.THREE);
             remainder.retainAll(reserve);
         }
+        if(remainder.size() < 5) {
+            return remainder;
+        }
 
-        /* Constraint 3:
-            If the battery is in the lower 40 percentile, then the displaySize can't be better than NormalizedValue.TWO
-            If the battery is in the greater 60 percentile, then the displaySize must be better than NormalizedValue.TWO
+        /* Constraint 4:
+            If the displaySize is in the lower 40 percentile, then the battery can't be better than NormalizedValue.TWO
+            If the displaySize is in the greater 60 percentile, then the battery must be better than NormalizedValue.TWO
          */
-        if(battery.compareTo(NormalizedValue.THREE) < 0) {
-            reserve = smartphoneRepository.findByDisplaySizeLessThan(NormalizedValue.THREE);
+        if(displaySize.compareTo(NormalizedValue.THREE) < 0) {
+            reserve = smartphoneRepository.findByBatteryLessThan(NormalizedValue.THREE);
             remainder.retainAll(reserve);
         } else {
-            reserve = smartphoneRepository.findByDisplaySizeGreaterThan(NormalizedValue.TWO);
+            reserve = smartphoneRepository.findByBatteryGreaterThan(NormalizedValue.TWO);
+            remainder.retainAll(reserve);
+        }
+        if(remainder.size() < 5) {
+            return remainder;
+        }
+
+        /* Constraint 5:
+            If the resolution is in the lower 60 percentile, then the price can't be better than NormalizedValue.THREE
+            If the resolution is in the greater 40 percentile, then the price must be better than NormalizedValue.THREE
+         */
+        if(resolution.compareTo(NormalizedValue.FOUR) < 0) {
+            reserve = smartphoneRepository.findByPriceLessThan(NormalizedValue.FOUR);
+            remainder.retainAll(reserve);
+        } else {
+            reserve = smartphoneRepository.findByPriceGreaterThan(NormalizedValue.THREE);
+            remainder.retainAll(reserve);
+        }
+        if(remainder.size() < 5) {
+            return remainder;
+        }
+
+        /* Constraint 6:
+            If the battery is in the greater 40 percentile, then the OS can't be Apple
+         */
+        if(battery.compareTo(NormalizedValue.THREE) < 0) {
+            reserve = smartphoneRepository.findByBrandNot(Brand.APPLE);
             remainder.retainAll(reserve);
         }
 
