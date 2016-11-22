@@ -518,7 +518,7 @@
   {
   "device-name": "Huawei Ascend D1",
   "brand": "Huawei",
-  "price": "",
+  "price": "163",
   "display-size": "4.5",
   "resolution": "326",
   "battery": "1800",
@@ -530,7 +530,7 @@
 {
   "device-name": "Huawei Ascend G300",
   "brand": "Huawei",
-  "price": "",
+  "price": "83",
   "display-size": "4.8",
   "resolution": "233",
   "battery": "1500",
@@ -543,7 +543,7 @@
 {
   "device-name": "Huawei Ascend P1 LTE",
   "brand": "Huawei",
-  "price": "",
+  "price": "145",
   "display-size": "4.3",
   "resolution": "256",
   "battery": "2000",
@@ -555,7 +555,7 @@
 {
   "device-name": "Huawei Ascend W1",
   "brand": "Huawei",
-  "price": "",
+  "price": "245",
   "display-size": "4",
   "resolution": "233",
   "battery": "1950",
@@ -567,7 +567,7 @@
 {
   "device-name": "Huawei Ascend Y201 Pro",
   "brand": "Huawei",
-  "price": "",
+  "price": "129",
   "display-size": "3.5",
   "resolution": "165",
   "battery": "1400",
@@ -579,7 +579,7 @@
 {
   "device-name": "Huawei Ascend G500",
   "brand": "Huawei",
-  "price":"",
+  "price":"200",
   "display-size": "4.3",
   "resolution": "256",
   "battery": "1930",
@@ -592,7 +592,7 @@
 {
   "device-name": "Huawei Ascend G510",
   "brand": "Huawei",
-  "price":"",
+  "price":"200",
   "display-size": "4.5",
   "resolution": "218",
   "battery": "1700",
@@ -604,7 +604,7 @@
 {
   "device-name": "Huawei Ascend G615",
   "brand": "Huawei",
-  "price":"",
+  "price":"229",
   "display-size": "4.5",
   "resolution": "330",
   "battery": "2150",
@@ -616,7 +616,7 @@
 {
   "device-name": "Huawei Ascend P2",
   "brand": "Huawei",
-  "price": "",
+  "price": "660",
   "display-size": "4.7",
   "resolution": "312",
   "battery": "2420",
@@ -628,7 +628,7 @@
 {
   "device-name": "Pixel",
   "brand": "Google",
-  "price": "",
+  "price": "650",
   "display-size": "5.5",
   "resolution": "424",
   "battery": "2750",
@@ -640,7 +640,7 @@
 {
   "device-name": "Google Pixel XL",
   "brand": "Google",
-  "price":"",
+  "price":"769",
   "display-size": "5.5",
   "resolution": "534",
   "battery": "3450",
@@ -652,7 +652,7 @@
 {
   "device-name": "LG G3",
   "brand": "LG",
-  "price": "",
+  "price": "220",
   "display-size": "5.5",
   "resolution": "538",
   "battery": "3000",
@@ -664,7 +664,7 @@
 {
   "device-name": "LG G5",
   "brand": "LG",
-  "price": "",
+  "price": "650",
   "display-size": "5.3",
   "resolution": "554",
   "battery": "2800",
@@ -676,7 +676,7 @@
 {
   "device-name": "Sony XPeria Z5",
   "brand": "Sony",
-  "price": "",
+  "price": "500",
   "display-size": "5.2",
   "resolution": "428",
   "battery": "2900",
@@ -688,7 +688,7 @@
 {
   "device-name": "Sony XPeria Z3",
   "brand": "Sony",
-  "price": "",
+  "price": "230",
   "display-size": "5.2",
   "resolution": "424",
   "battery": "3100",
@@ -700,7 +700,7 @@
 {
   "device-name": "HTC One M9",
   "brand": "HTC",
-  "price": "",
+  "price": "399",
   "display-size": "5",
   "resolution": "441",
   "battery": "2840",
@@ -712,7 +712,7 @@
 {
   "device-name": "HTC One A9",
   "brand": "HTC",
-  "price": "",
+  "price": "320",
   "display-size": "5",
   "resolution": "441",
   "battery": "2150",
@@ -724,7 +724,7 @@
 {
   "device-name": "HTC One S",
   "brand": "HTC",
-  "price": "",
+  "price": "105",
   "display-size": "4.3",
   "resolution": "256",
   "battery": "1650",
