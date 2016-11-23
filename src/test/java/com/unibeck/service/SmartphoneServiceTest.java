@@ -67,4 +67,22 @@ public class SmartphoneServiceTest {
         List<Smartphone> smartphoneList = smartphoneService.findClosestMatching(constraint);
         assertEquals(3, smartphoneList.size());
     }
+
+    @Test
+    public void basicConstraintWithAndroid() throws Exception {
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
+        seed.seedSmartphones();
+
+        UserConstraint constraint = new UserConstraint(
+                Brand.SAMSUNG, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
+        );
+
+        //Constraint 1/2: 40 results left
+        //Constraint 3:   40 results left
+        //Constraint 4:   22 results left
+        //Constraint 5:   03 results left
+        //Constraint 6:   03 results left
+        List<Smartphone> smartphoneList = smartphoneService.findClosestMatching(constraint);
+        assertEquals(13, smartphoneList.size());
+    }
 }

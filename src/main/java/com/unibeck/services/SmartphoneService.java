@@ -45,15 +45,26 @@ public class SmartphoneService {
         /* Constraint 1/2:
             If the brand is Apple, then ram can't be better than NormalizedValue.THREE
             AND the operatingSystem must be iOS
+
+            Else find all phones that aren't iOS
         */
-        if(userConstraint.getBrand() == Brand.APPLE) {
+        if(userConstraint.getOperatingSystem() == OS.iOS) {
             reserve = smartphoneRepository.findByRamLessThan(NormalizedValue.FOUR);
             remainder.retainAll(reserve);
 
-            reserve = smartphoneRepository.findByOperatingSystem(OS.iOS);
+            reserve = smartphoneRepository.findByBrand(Brand.APPLE);
+            remainder.retainAll(reserve);
+        } else if (userConstraint.getOperatingSystem() == OS.ANDROID) {
+            reserve = smartphoneRepository.findByBrandNot(Brand.MICROSOFT);
+            remainder.retainAll(reserve);
+
+            reserve = smartphoneRepository.findByBrandNot(Brand.APPLE);
+            remainder.retainAll(reserve);
+        } else {
+            reserve = smartphoneRepository.findByBrand(Brand.MICROSOFT);
             remainder.retainAll(reserve);
         }
-        if(remainder.size() < 5) {
+        if(remainder.size() <= 5) {
             return remainder;
         }
 
@@ -64,7 +75,7 @@ public class SmartphoneService {
             reserve = smartphoneRepository.findByCameraLessThan(NormalizedValue.THREE);
             remainder.retainAll(reserve);
         }
-        if(remainder.size() < 5) {
+        if(remainder.size() <= 5) {
             return remainder;
         }
 
@@ -79,7 +90,7 @@ public class SmartphoneService {
             reserve = smartphoneRepository.findByBatteryGreaterThan(NormalizedValue.TWO);
             remainder.retainAll(reserve);
         }
-        if(remainder.size() < 5) {
+        if(remainder.size() <= 5) {
             return remainder;
         }
 
@@ -94,7 +105,7 @@ public class SmartphoneService {
             reserve = smartphoneRepository.findByPriceGreaterThan(NormalizedValue.THREE);
             remainder.retainAll(reserve);
         }
-        if(remainder.size() < 5) {
+        if(remainder.size() <= 5) {
             return remainder;
         }
 
