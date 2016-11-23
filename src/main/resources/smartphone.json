@@ -188,7 +188,7 @@
     "battery": "1905",
     "ram": "1",
     "storage": "8",
-    "os": "Windows Phone 8",
+    "os": "Windows Mobile",
     "camera": "5"
   },
   {
@@ -200,7 +200,7 @@
     "battery": "1560",
     "ram": "1",
     "storage": "8",
-    "os": "Windows Phone 8",
+    "os": "Windows Mobile",
     "camera": "2"
   },
   {
@@ -212,7 +212,7 @@
     "battery": "1560",
     "ram": "1",
     "storage": "8",
-    "os": "Windows Phone 8",
+    "os": "Windows Mobile",
     "camera": "5"
   },
   {
@@ -224,7 +224,7 @@
     "battery": "2500",
     "ram": "1",
     "storage": "8",
-    "os": "Windows Phone 8",
+    "os": "Windows Mobile",
     "camera": "8"
   },
   {
@@ -236,7 +236,7 @@
     "battery": "3000",
     "ram": "1",
     "storage": "8",
-    "os": "Windows Phone 8",
+    "os": "Windows Mobile",
     "camera": "13"
   },
   {
@@ -248,7 +248,7 @@
     "battery": "3000",
     "ram": "3",
     "storage": "32",
-    "os": "Windows 10 Mobile",
+    "os": "Windows Mobile",
     "camera": "20"
   },
   {
@@ -260,7 +260,7 @@
     "battery": "3340",
     "ram": "3",
     "storage": "32",
-    "os": "Windows 10 Mobile",
+    "os": "Windows Mobile",
     "camera": "20"
   },
   {
@@ -272,7 +272,7 @@
     "battery": "2100",
     "ram": "1",
     "storage": "8",
-    "os": "Windows 10 Mobile",
+    "os": "Windows Mobile",
     "camera": "5"
   },
   {
@@ -561,7 +561,7 @@
   "battery": "1950",
   "ram": "0.512",
   "storage":"4",
-  "os": "Windows Phone 8",
+  "os": "Windows Mobile",
   "camera": "5"
 },
 {

@@ -6,8 +6,7 @@ package com.unibeck.model;
 public enum OS {
     ANDROID("Android"),
     iOS("iOS"),
-    WINDOWS_TEN_MOBILE("Windows 10 Mobile"),
-    WINDOWS_PHONE_EIGHT("Windows Phone 8");
+    WINDOWS_MOBILE("Windows Mobile");
 
     private String value;
 

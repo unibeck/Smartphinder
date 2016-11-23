@@ -68,7 +68,7 @@ public class SmartphoneRepositoryTest {
         SeedDatabase seed = new SeedDatabase(smartphoneRepository);
         seed.seedSmartphones();
 
-        assertEquals(43, smartphoneRepository.count());
+        assertEquals(61, smartphoneRepository.count());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class SmartphoneRepositoryTest {
         //We can use this test to hone in on the percentile, one fifth of the repository should be the size of each percentile
         //Thus this test should result in 17 smartphones from the first and second percentile
         List<Smartphone> smartphoneList = smartphoneRepository.findByPriceLessThan(NormalizedValue.THREE);
-        assertEquals(18, smartphoneList.size());
+        assertEquals(20, smartphoneList.size());
     }
 }
 

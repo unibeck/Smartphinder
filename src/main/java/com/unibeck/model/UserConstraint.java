@@ -2,34 +2,45 @@ package com.unibeck.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by jbeckman on 11/21/16.
  */
 public class UserConstraint {
+    @NotNull
     @JsonProperty("brand")
     private Brand brand;
 
+    @NotNull
     @JsonProperty("os")
     private OS operatingSystem;
 
+    @NotNull
     @JsonProperty("price")
     private int price;
 
+    @NotNull
     @JsonProperty("battery")
     private int battery;
 
+    @NotNull
     @JsonProperty("camera")
     private int camera;
 
+    @NotNull
     @JsonProperty("ram")
     private double ram;
 
+    @NotNull
     @JsonProperty("storage")
     private int storage;
 
+    @NotNull
     @JsonProperty("resolution")
     private int resolution;
 
+    @NotNull
     @JsonProperty("display-size")
     private double displaySize;
 
