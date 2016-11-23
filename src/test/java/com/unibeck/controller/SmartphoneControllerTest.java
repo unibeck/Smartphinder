@@ -1,6 +1,7 @@
 package com.unibeck.controller;
 
 
+import com.unibeck.SeedDatabase;
 import com.unibeck.controllers.SmartphoneController;
 import com.unibeck.model.*;
 import com.unibeck.repository.SmartphoneRepository;
@@ -10,11 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by jbeckman on 6/17/2016.
@@ -59,6 +63,52 @@ public class SmartphoneControllerTest {
 
         smartphones = smartphoneController.getAllSmartphones();
         assertEquals(1, smartphones.size());
+    }
+
+    @Test
+    public void findSmartphonesWithConstraintSatisfaction() throws Exception {
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
+        seed.seedSmartphones();
+
+        UserConstraint constraint = new UserConstraint(
+                Brand.GOOGLE, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
+        );
+
+
+        ResponseEntity<ConstraintSatisfactionResult> result = smartphoneController.findSmartphonesRelatedTo(constraint);
+        ConstraintSatisfactionResult csr = result.getBody();
+        assertEquals(8, csr.getRemainder().size());
+
+        boolean[] constraintsUsed = csr.getConstraintsUsed();
+        assertTrue(constraintsUsed[0]);
+        assertTrue(constraintsUsed[1]);
+        assertTrue(constraintsUsed[2]);
+        assertTrue(constraintsUsed[3]);
+        assertTrue(constraintsUsed[4]);
+        assertTrue(constraintsUsed[5]);
+    }
+
+    @Test
+    public void constraintSatisfactionWithBackTracking() throws Exception {
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
+        seed.seedSmartphones();
+
+        UserConstraint constraint = new UserConstraint(
+                Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
+        );
+
+
+        ResponseEntity<ConstraintSatisfactionResult> result = smartphoneController.findSmartphonesRelatedTo(constraint);
+        ConstraintSatisfactionResult csr = result.getBody();
+        assertEquals(1, csr.getRemainder().size());
+
+        boolean[] constraintsUsed = csr.getConstraintsUsed();
+        assertTrue(constraintsUsed[0]);
+        assertTrue(constraintsUsed[1]);
+        assertTrue(constraintsUsed[2]);
+        assertTrue(constraintsUsed[3]);
+        assertFalse(constraintsUsed[4]);
+        assertFalse(constraintsUsed[5]);
     }
 
 //     new Smartphone()
