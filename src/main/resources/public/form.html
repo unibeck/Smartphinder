@@ -1,0 +1,42 @@
+<div class="row">
+<div class="col-sm-8 col-sm-offset-2">
+
+  <div id="form-container">
+  
+      <div class="page-header text-center">
+          <h5>SmartPhinder</h5>
+          
+          <!-- the links to our nested states using relative paths -->
+          <!-- add the active class if the state matches our ui-sref -->
+          <div id="status-buttons" class="text-center">
+              <a ui-sref-active="active" ui-sref=".brand"><span>1</span> Brand</a>
+              <a ui-sref-active="active" ui-sref=".screensize"><span>2</span> Screensize</a>
+              <a ui-sref-active="active" ui-sref=".pixeldensity"><span>3</span> Pixel density</a>
+              <a ui-sref-active="active" ui-sref=".battery"><span>4</span> Battery</a>
+              <a ui-sref-active="active" ui-sref=".ram"><span>5</span> Ram</a>
+              <a ui-sref-active="active" ui-sref=".os"><span>6</span> OS</a>
+              <a ui-sref-active="active" ui-sref=".camera"><span>7</span> Camera</a>
+              <a ui-sref-active="active" ui-sref=".storage"><span>8</span> Storage</a>
+              <a ui-sref-active="active" ui-sref=".price"><span>9</span> Price</a>
+          </div>
+      </div>
+      
+      <!-- use ng-submit to catch the form submission and use our Angular function -->
+      <form id="signup-form" ng-submit="processForm()">
+          <!-- our nested state views will be injected here -->
+<!--        <div class="card">-->
+          <div id="form-views" ui-view></div>
+<!--        </div>-->
+          
+      </form>
+  
+  </div>
+  
+  <!-- show our formData as it is being typed -->
+  <pre>
+<!--  Real time JSON baby-->
+    {{ response }}
+  </pre>
+
+</div>
+</div>

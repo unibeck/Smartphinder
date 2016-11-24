@@ -1,424 +1,46 @@
 <!DOCTYPE html>
-<html> 
-  <head>
-    <title>SmartPhinder</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-    <meta content="utf-8" http-equiv="encoding"/>
-  </head>
- 
-  <body>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script> 
+    <!-- load angular, nganimate, and ui-router -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     
-    <div class="row">
-        <div class="col s12 m12 l12">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">What are you looking for?</span>
-              
-                <div class="row">
-                  <div class="col s12 m6 l6">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">Any specific brand you are interested in?</span>
-                        <div class="brand">
-                           <form action="#" id="brand">
-                            <p>
-                              <input class="with-gap group1" name="group1" type="radio" id="apple" value="Apple"/>
-                              <label for="apple">Apple</label>
-                            </p>
-                            <p>
-                              <input class="with-gap group1" name="group1" type="radio" id="microsoft" value="Microsoft"/>
-                              <label for="microsoft">Microsoft</label>
-                            </p>
-                            <p>
-                              <input class="with-gap group1" name="group1" type="radio" id="google" value="Google"/>
-                              <label for="google">Google</label>
-                            </p>
-                            <p>
-                              <input class="with-gap group1" name="group1" type="radio" id="samsung" value="Samsung"/>
-                              <label for="samsung">Samsung</label>
-                            </p>
-                            <p>
-                              <input class="with-gap group1" name="group1" type="radio" id="otherbrand" value=""/>
-                              <label for="otherbrand">Anything is fine</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<!--    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">-->
+    <script src="js/app.js"></script>
+    
+</head>
+<body ng-app="smartphinder">
 
-                  <div class="col s12 m6 l6">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">Any preference on the screen size?</span>
-                        <div class="screensize">
-                           <form action="#" id="screensize">
-                         
-                            <p>
-                              <input class="with-gap" name="group2" type="radio" id="threefive" value="3.5"/>
-                              <label for="threefive">3.5 inches</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group2" type="radio" id="four" value="4"/>
-                              <label for="four">4 inches</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group2" type="radio" id="foureight" value="4.8"/>
-                              <label for="foureight">4.8 inches</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group2" type="radio" id="fivefive" value="5.5"/>
-                              <label for="fivefive">5.5 inches</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group2" type="radio" id="othersize" value=""/>
-                              <label for="othersize">No preference</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="row">
-                  <div class="col s12 m12 l12">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">Are you a fan of bright and colorful screen?</span>
-                        <div class="screendensity">
-                           <form action="#" id="screendensity">
-                            <p>
-                              <input class="with-gap" name="group3" type="radio" id="oneppi" value="165"/>
-                              <label for="oneppi">~165 ppi</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group3" type="radio" id="twoppi" value="230"/>
-                              <label for="twoppi">~230 ppi</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group3" type="radio" id="threeppi" value="330"/>
-                              <label for="threeppi">~330 ppi</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group3" type="radio" id="fourppi" value="401"/>
-                              <label for="fourppi">~401 ppi</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group3" type="radio" id="otherppi" value="other"/>
-                              <label for="otherppi">Don't want to go too deep into specs</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              
-              <div class="row">
-                  <div class="col s12 m6 l6">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">Do you use your phone like you use your shoes?</span>
-                        <div class="battery">
-                           <form action="#" id="battery">
-                            <p>
-                              <input class="with-gap" name="group4" type="radio" id="lowbat" value="1440"/>
-                              <label for="lowbat">~1440 mAh battery</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group4" type="radio" id="lowmedbat" value="1810"/>
-                              <label for="lowmedbat">~1810 mAh battery</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group4" type="radio" id="mediumbat" value="2750"/>
-                              <label for="mediumbat">~2750 mAh battery</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group4" type="radio" id="highbat" value="3600"/>
-                              <label for="highbat">~3600 mAh battery</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group4" type="radio" id="otherbattery" value=""/>
-                              <label for="highbat">Just give me something good</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                
-                <div class="col s12 m6 l6">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">How about RAM now?</span>
-                        <div class="ram">
-                           <form action="#" id="ram">
-                            <p>
-                              <input class="with-gap" name="group5" type="radio" id="oneram" value="1"/>
-                              <label for="oneram">~1 GB RAM</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group5" type="radio" id="tworam" value="2"/>
-                              <label for="tworam">~2 GB RAM</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group5" type="radio" id="threeram" value="3"/>
-                              <label for="threeram">~3 GB RAM</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group5" type="radio" id="fourram" value="4"/>
-                              <label for="fourram">~4 GB RAM</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group5" type="radio" id="otherram" value=""/>
-                              <label for="otherram">RAM as in Dodge RAM?</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              
-              <div class="row">
-                  <div class="col s12 m6 l6">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">Are you an OS fanboy?</span>
-                        <div class="os">
-                           <form action="#" id="os">
-                            <p>
-                              <input class="with-gap" name="group6" type="radio" id="ios" value="iOS"/>
-                              <label for="ios">iOS</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group6" type="radio" id="android" value="Android"/>
-                              <label for="android">Android</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group6" type="radio" id="windows" value="Windows"/>
-                              <label for="windows">Windows phone</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group6" type="radio" id="otheros" value=""/>
-                              <label for="otheros">Nah...anything is fine</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                
-                <div class="col s12 m6 l6">
-                    <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">Like taking pictures? Artistic?</span>
-                        <div class="camera">
-                           <form action="#" id="camera">
-                            <p>
-                              <input class="with-gap" name="group7" type="radio" id="fivemp" value="5"/>
-                              <label for="fivemp">~5 Megapixel</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group7" type="radio" id="eightmp" value="8"/>
-                              <label for="eightmp">~8 Megapixel</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group7" type="radio" id="twelvemp" value="12"/>
-                              <label for="twelvemp">~12 Megapixel</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group7" type="radio" id="sixteenmp" value="16"/>
-                              <label for="sixteenmp">~16 Megapixel</label>
-                            </p>
-                            <p>
-                              <input class="with-gap" name="group7" type="radio" id="othermp" value=""/>
-                              <label for="othermp">Not too photogenic</label>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="row">
-                
-                  <div class="col s12 m6 l6">
-                      <div class="card">
-                        <div class="card-content">
-                          <span class="card-title">Don't like to delete stuff? Need more storage?</span>
-                          <div class="storage">
-                             <form action="#" id="storage">
-                              <p>
-                                <input class="with-gap" name="group8" type="radio" id="sixteengb" value="16"/>
-                                <label for="sixteengb">16 GB</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group8" type="radio" id="thirtytwogb" value="32"/>
-                                <label for="thirtytwogb">32 GB</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group8" type="radio" id="sixtyfourgb" value="64"/>
-                                <label for="sixtyfourgb">64 GB</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group8" type="radio" id="onetwentyeightgb" value="128"/>
-                                <label for="onetwentyeightgb">128 GB</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group8" type="radio" id="othergb" value=""/>
-                                <label for="othergb">How do you download, again?</label>
-                              </p>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  
-                    <div class="col s12 m6 l6">
-                      <div class="card">
-                        <div class="card-content">
-                          <span class="card-title">Money in the bank? </span>
-                          <div class="price">
-                             <form action="#" id="price">
-                              <p>
-                                <input class="with-gap" name="group9" type="radio" id="onehundred" value="100"/>
-                                <label for="onehundred">~$100</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group9" type="radio" id="threehundred" value="300"/>
-                                <label for="threehundred">~$300</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group9" type="radio" id="fivehundred" value="500"/>
-                                <label for="fivehundred">~$500</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group9" type="radio" id="sevenhundred" value="700"/>
-                                <label for="sevenhundred">~$700</label>
-                              </p>
-                              <p>
-                                <input class="with-gap" name="group9" type="radio" id="othermoney" value=""/>
-                                <label for="othermoney">Money in the bank ;)</label>
-                              </p>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                </div>
-              
-              </div>
-            <div class="card-action">
-              <a class="waves-effect waves-light btn" onclick="getvalues()"><i class="material-icons left">send</i>Submit</a>
-            </div>
-          </div>
+<!-- views will be injected here -->
+<div class="row">
+<!--
+  <div class="col m2 l2">
+    <a ui-sref="form.brand" class="btn btn-block btn-info">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
+-->
+  <div class="col s12 m8 l8 offset-l2 offset-m2">
+    <div class="form_container">
+      <div class="card">
+        <div class="card-content">
+          <div ui-view></div>
         </div>
       </div>
-              
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script>    
-      <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-    <script type="text/javascript" src="app.js"></script> 
-    
-    <script type="text/javascript">
-      
-      function getvalues()
-      {
-        
-       
-        
-        var response ={userresponse: {}};
-        
-        var brand = $('input[name=group1]:checked', '#brand').val();
-        var screensize = $('input[name=group2]:checked', '#screensize').val();
-        var screendensity = $('input[name=group3]:checked', '#screendensity').val();
-        var battery = $('input[name=group4]:checked', '#battery').val();
-        var ram = $('input[name=group5]:checked', '#ram').val();
-        var os = $('input[name=group6]:checked', '#os').val();
-        var camera = $('input[name=group7]:checked', '#camera').val();
-        var storage = $('input[name=group8]:checked', '#storage').val();
-        var price = $('input[name=group9]:checked', '#price').val();
-        
-        if(brand == "")
-        {
-          brand = null;
-        }
-        if(screensize == "")
-        {
-          screensize = null;
-        }
-        if(screendensity == "")
-        {
-          screendensity = null;
-        }
-        if(battery == "")
-        {
-          battery = null;
-        }
-        if(ram == "")
-        {
-          ram = null;
-        }
-        if(os == "")
-        {
-          os = null;
-        }
-        if(camera == "")
-        {
-          camera = null;
-        }
-        if(storage == "")
-        {
-          storage = null;
-        }
-        if(price == "")
-        {
-          price = null;
-        } 
-        
-        //filling up the JSON
-        response.userresponse["brand"] = brand;
-        response.userresponse["os"] = os;
-        response.userresponse["price"] = price;
-        response.userresponse["battery"] = battery;
-        response.userresponse["camera"] = camera;
-        response.userresponse["ram"] = ram;
-        response.userresponse["storage"] = storage;
-        response.userresponse["resolution"] = screendensity;
-        response.userresponse["display-size"] = screensize;  
-        
-        console.log(response);
-        
-        var settings = {
-         "async": true,
-         "crossDomain": true,
-         "url": "/smartphone/constraint",
-         "method": "POST",
-         "contentType": 'application/json',
-         "data": JSON.stringify(response)
-         };
+    </div>
+  </div>
+</div>
 
-      
-        $.ajax(settings).done(function (response) {
-          console.log(response);
-        });
-      
-    
-      }
-      
-      
-      
-      
-    </script>
-  </body>
+
+
+</body>
 </html>
