@@ -1,5 +1,5 @@
 .header-img {
-  background-image: url("header.jpg");
+  background-image: url("../styles/header.jpg");
   opacity: 0.75;
   background-repeat: no-repeat;
   background-size: cover;
