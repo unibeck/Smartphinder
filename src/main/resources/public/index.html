@@ -16,17 +16,215 @@
   </head>
 
   <body>
-    <div layout="column" md-theme="default" ng-controller="AppCtrl" style="height: 100%"><!--theme declaration-->
-        <div class="header-background">
-          <div class="header-img"></div>
-            <div class="md-display-2 header-text">SmartPhinder</div>
+    <div layout="column" md-theme="default" ng-controller="AppCtrl" style="height: 100%">
+      <div class="header-background">
+        <div class="header-img"></div>
+        <div class="md-display-2 header-text">SmartPhinder</div>
 
-            <div class="header-text" style="padding-top: 142px">
-              <p class="md-headline">Neil Shah</p>
-              <p class="md-headline">Jonathan Beckman</p>
-            </div>
-          </div>
+        <div class="header-text" style="padding-top: 142px">
+          <p class="md-headline">Neil Shah</p>
+          <p class="md-headline">Jonathan Beckman</p>
         </div>
+      </div>
+
+      <md-content flex layout="column" layout-align="center center">
+        <div layout="row" layout-align="center center" style="height: 720px">
+          <md-button ng-click="previousQuestion()" ng-disabled="currentQuestion == 0" class="md-fab md-primary" aria-label="Previous">
+            <md-icon>chevron_left</md-icon>
+          </md-button>
+
+          <md-card style="width: 720px">
+            <div ng-if="currentQuestion == 0">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Any brand specific you're interested in?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-radio-group ng-model="userConstraint.brand">
+                    <md-radio-button value="APPLE" class="md-primary"> Apple </md-radio-button>
+                    <md-radio-button value="GOOGLE"> Google </md-radio-button>
+                    <md-radio-button value="HTC"> HTC </md-radio-button>
+                    <md-radio-button value="HUAWEI"> Huawei </md-radio-button>
+                    <md-radio-button value="SAMSUNG"> Samsung </md-radio-button>
+                    <md-radio-button value="LG"> LG </md-radio-button>
+                    <md-radio-button value="MICROSOFT"> Microsoft </md-radio-button>
+                  </md-radio-group>
+                </div>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 1">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Are you an OS fanboy?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-radio-group ng-model="userConstraint.os">
+                    <md-radio-button value="ANDROID"> Android </md-radio-button>
+                    <md-radio-button value="iOS"> iOS </md-radio-button>
+                    <md-radio-button value="WINDOWS_MOBILE"> Windows Mobile </md-radio-button>
+                  </md-radio-group>
+                </div>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 2">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">How do you like your screen size?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint['display-size']"
+                    step="0.1" min="3.5" max="6.0">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  {{userConstraint['display-size']}} inches
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 3">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Are you a fan of a high resolution screen?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint.resolution"
+                    step="20" min="160" max="560">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  {{userConstraint.resolution}} PPI
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 4">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Do you use your phone like you use your shoes?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint.battery"
+                    step="50" min="1200" max="3600">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  {{userConstraint.battery}} mAh
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 5">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">How do you feel about RAM?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint.ram"
+                    step="0.5" min="0.5" max="5.0">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  {{userConstraint.ram}} GB
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 6">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Like taking pictures?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint.camera"
+                    step="1" min="5" max="16">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  {{userConstraint.camera}} MP
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 7">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Don't like clouds or deleting things?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint.storage"
+                    step="16" min="16" max="128">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  {{userConstraint.storage}} GB
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 8">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Money in the bank?</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout="row" layout-align="space-around center">
+                <div flex style="padding: 0 16px 0 16px">
+                  <md-slider flex md-discrete aria-label="slider"
+                    ng-model="userConstraint.price"
+                    step="100" min="50" max="750">
+                  </md-slider>
+                </div>
+                <h4 style="padding: 0 0 8px 16px">
+                  $ {{userConstraint.price}}
+                </h4>
+              </md-card-content>
+            </div>
+
+            <div ng-if="currentQuestion == 9">
+              <md-card-content layout="row" layout-align="space-around center">
+                <span ng-if="numOfValidConstraints > 99" class="md-headline">You're done! Submit your preferences</span>
+                <span ng-if="numOfValidConstraints < 99" class="md-headline">Go back - you must of missed a thing or two</span>
+              </md-card-content>
+            </div>
+
+            <md-progress-linear md-mode="determinate" value="{{numOfValidConstraints}}"></md-progress-linear>
+          </md-card>
+
+          <md-button ng-click="nextQuestion()" ng-disabled="currentQuestion > 8" class="md-fab md-primary" aria-label="Next">
+            <md-icon>chevron_right</md-icon>
+          </md-button>
+        </div>
+
+        <div style="height: 196px">
+          <md-button ng-click="submitConstraints()" ng-disabled="numOfValidConstraints < 99" class="md-raised md-primary">Submit</md-button>
+        </div>
+
+      </md-content>
     </div>
 
     <!-- AngularJS/Material libraries -->
