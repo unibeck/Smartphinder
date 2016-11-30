@@ -1,0 +1,43 @@
+.header-img {
+  background-image: url("../styles/header.jpg");
+  opacity: 0.75;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 256px;
+}
+
+.header-background {
+  animation: colorChange 30s infinite;
+  -webkit-animation: colorChange 30s infinite;
+  height: 256px;
+}
+
+@keyframes colorChange {
+  0%   {background: red;}
+  25%  {background: yellow;}
+  50%  {background: blue;}
+  75%  {background: green;}
+  100% {background: red;}
+}
+
+@-webkit-keyframes colorChange { /* Safari and Chrome - necessary duplicate */
+  0%   {background: red;}
+  25%  {background: yellow;}
+  50%  {background: blue;}
+  75%  {background: green;}
+  100% {background: red;}
+}
+
+.header-text {
+  left: 10%;
+  right: 10%;
+  top: 42px;
+  color: #FFF;
+  text-align: center;
+  position: absolute;
+}
+
+.md-headline {
+  margin: 0;
+}

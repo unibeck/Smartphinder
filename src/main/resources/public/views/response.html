@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="../styles/response.css">
+<div layout="column" layout-align="center center" style="width: 100%; height 100%">
+
+  <div ng-if="loadingSmartphones">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <div layout="row" layout-align="center center" style="width: 100%; height 100%" ng-if="!loadingSmartphones">
+    <div ng-repeat="sp in smartphones" flex="25">
+      <md-card style="padding: 8px">
+        <div ng-style="{'background-image': 'url(' + sp.imgUrl + ')'}" class="card-img"></div>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{sp.name}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Learn More</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div>
+
+  <div style="padding-top: 32px">
+    <md-button ng-click="resetResponse()" class="md-raised md-primary">Search Again</md-button>
+  </div>
+</div>

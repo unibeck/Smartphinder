@@ -33,7 +33,7 @@ public class SmartphoneController {
 		ConstraintSatisfactionResult csr = smartphoneService.findClosestMatching(userConstraint);
 
 		if(csr.getRemainder().size() == 0) {
-			return new ResponseEntity<>((ConstraintSatisfactionResult) null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>((ConstraintSatisfactionResult) null, HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<>(csr, HttpStatus.OK);
 		}
