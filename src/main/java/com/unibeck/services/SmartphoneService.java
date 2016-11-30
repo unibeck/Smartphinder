@@ -29,7 +29,7 @@ public class SmartphoneService {
         return smartphoneRepository.findAll();
     }
 
-    public ConstraintSatisfactionResult findClosestMatching(UserConstraint uC) {
+    public List<Smartphone> findClosestMatching(UserConstraint uC) {
         Percentiles per = new Percentiles();
         NormalizedValue price = convertFromWithInt(uC.getPrice(), per.getPricePercentile());
         NormalizedValue battery = convertFromWithInt(uC.getBattery(), per.getBatteryPercentile());
@@ -39,164 +39,101 @@ public class SmartphoneService {
         NormalizedValue resolution = convertFromWithInt(uC.getResolution(), per.getDisplayResolutionPercentile());
         NormalizedValue displaySize = convertFromWithDouble(uC.getDisplaySize(), per.getDisplaySizePercentile());
 
-        ConstraintSatisfactionResult constraintSatisfactionResult = reduceSearchSpace(
-                uC.getBrand(),
-                uC.getOperatingSystem(),
-                price,
-                battery,
-                camera,
-                ram,
-                storage,
-                resolution,
-                displaySize
-        );
+        List<Smartphone> allSmartphones = smartphoneRepository.findAll();
 
-        List<Smartphone> csSmartphones = constraintSatisfactionResult.getRemainder();
-        // Let's search this reduce search space and find any smartphone within a padding of 1
-        List<Smartphone> remainder = csSmartphones
-                  .stream()
+
+
+        /*
+            Constraint Zero
+        */
+        List<Smartphone> brandConstraint = allSmartphones
+                  .parallelStream()
                   .filter(sp ->
-                          Math.abs(sp.getPrice().compareTo(price)) <= 1 &&
-                          Math.abs(sp.getBattery().compareTo(battery)) <= 1 &&
-                          Math.abs(sp.getRam().compareTo(ram)) <= 1 &&
-                          Math.abs(sp.getStorage().compareTo(storage)) <= 1 &&
-                          Math.abs(sp.getDisplayResolution().compareTo(displaySize)) <= 1 &&
-                          Math.abs(sp.getDisplaySize().compareTo(displaySize)) <= 1
+                      sp.getBrand().equals(uC.getBrand())
                   )
                   .collect(Collectors.toList());
 
-        return new ConstraintSatisfactionResult(remainder, constraintSatisfactionResult.getConstraintsUsed());
-    }
-
-    private ConstraintSatisfactionResult reduceSearchSpace(Brand brand,
-                                                           OS operatingSystem,
-                                                           NormalizedValue price,
-                                                           NormalizedValue battery,
-                                                           NormalizedValue camera,
-                                                           NormalizedValue ram,
-                                                           NormalizedValue storage,
-                                                           NormalizedValue resolution,
-                                                           NormalizedValue displaySize) {
-
-        List<Smartphone> remainder = smartphoneRepository.findAll();
-        List<Smartphone> reserve;
-
-        boolean[] constraintsUsed = {false, false, false, false, false, false};
-        List<Smartphone> backTrack = remainder;
-
-        /* Constraint 0/1:
-            If the operatingSystem is iOS, then ram can't be better than NormalizedValue.THREE
-            AND the brand must be Apple
-
-            If the operatingSystem is Android, then brand can't be Microsoft
-            AND the brand can't be Apple
-
-            Else the operatingSystem must be Microsoft, then the brand must be Microsoft
+        /*
+            Constraint Zero
         */
-        if(operatingSystem == OS.iOS) {
-            reserve = smartphoneRepository.findByRamLessThan(NormalizedValue.FOUR);
-            remainder.retainAll(reserve);
+        List<Smartphone> osConstraint = brandConstraint
+                  .parallelStream()
+                  .filter(sp ->
+                      sp.getOperatingSystem().equals(uC.getOperatingSystem())
+                  )
+                  .collect(Collectors.toList());
 
-            reserve = smartphoneRepository.findByBrand(Brand.APPLE);
-            remainder.retainAll(reserve);
-        } else if (operatingSystem == OS.ANDROID) {
-            reserve = smartphoneRepository.findByBrandNot(Brand.MICROSOFT);
-            remainder.retainAll(reserve);
-
-            reserve = smartphoneRepository.findByBrandNot(Brand.APPLE);
-            remainder.retainAll(reserve);
-        } else {
-            reserve = smartphoneRepository.findByBrand(Brand.MICROSOFT);
-            remainder.retainAll(reserve);
-        }
-        constraintsUsed[0] = true; constraintsUsed[1] = true;
-
-        if(remainder.isEmpty()) {
-            constraintsUsed[0] = false; constraintsUsed[1] = false;
-            remainder = backTrack;
-        } else if(remainder.size() <= 5) {
-            return new ConstraintSatisfactionResult(remainder, constraintsUsed);
-        } else {
-            backTrack = remainder;
-        }
-
-        /* Constraint 2:
-            If price is in the lower 40 percentile, then the camera can't be better than NormalizedValue.TWO
+        /*
+            Constraint Zero
         */
-        if(price.compareTo(NormalizedValue.THREE) < 0) {
-            reserve = smartphoneRepository.findByCameraLessThan(NormalizedValue.THREE);
-            remainder.retainAll(reserve);
-        }
-        constraintsUsed[2] = true;
+        List<Smartphone> priceConstraint = osConstraint
+                  .parallelStream()
+                  .filter(sp ->
+                      Math.abs(sp.getPrice().compareTo(price)) <= 1
+                  )
+                  .collect(Collectors.toList());
 
-        if(remainder.isEmpty()) {
-            constraintsUsed[2] = false;
-            remainder = backTrack;
-        } else if(remainder.size() <= 5) {
-            return new ConstraintSatisfactionResult(remainder, constraintsUsed);
-        } else {
-            backTrack = remainder;
-        }
+        /*
+            Constraint One
+        */
+        List<Smartphone> batteryConstraint = priceConstraint
+                .parallelStream()
+                .filter(sp ->
+                      Math.abs(sp.getBattery().compareTo(battery)) <= 1
+                )
+                .collect(Collectors.toList());
 
-        /* Constraint 3:
-            If the displaySize is in the lower 40 percentile, then the battery can't be better than NormalizedValue.TWO
-            If the displaySize is in the greater 60 percentile, then the battery must be better than NormalizedValue.TWO
-         */
-        if(displaySize.compareTo(NormalizedValue.THREE) < 0) {
-            reserve = smartphoneRepository.findByBatteryLessThan(NormalizedValue.THREE);
-            remainder.retainAll(reserve);
-        } else {
-            reserve = smartphoneRepository.findByBatteryGreaterThan(NormalizedValue.TWO);
-            remainder.retainAll(reserve);
-        }
-        constraintsUsed[3] = true;
+        /*
+            Constraint Two
+        */
+        List<Smartphone> cameraConstraint = batteryConstraint
+                .parallelStream()
+                .filter(sp ->
+                      Math.abs(sp.getCamera().compareTo(camera)) <= 1
+                )
+                .collect(Collectors.toList());
 
-        if(remainder.isEmpty()) {
-            constraintsUsed[3] = false;
-            remainder = backTrack;
-        } else if(remainder.size() <= 5) {
-            return new ConstraintSatisfactionResult(remainder, constraintsUsed);
-        } else {
-            backTrack = remainder;
-        }
+        /*
+            Constraint Three
+        */
+        List<Smartphone> ramConstraint = cameraConstraint
+                .parallelStream()
+                .filter(sp ->
+                      Math.abs(sp.getRam().compareTo(ram)) <= 1
+                )
+                .collect(Collectors.toList());
 
-        /* Constraint 4:
-            If the resolution is in the lower 60 percentile, then the price can't be better than NormalizedValue.THREE
-            If the resolution is in the greater 40 percentile, then the price must be better than NormalizedValue.THREE
-         */
-        if(resolution.compareTo(NormalizedValue.FOUR) < 0) {
-            reserve = smartphoneRepository.findByPriceLessThan(NormalizedValue.FOUR);
-            remainder.retainAll(reserve);
-        } else {
-            reserve = smartphoneRepository.findByPriceGreaterThan(NormalizedValue.THREE);
-            remainder.retainAll(reserve);
-        }
-        constraintsUsed[4] = true;
+        /*
+            Constraint Four
+        */
+        List<Smartphone> storageConstraint = ramConstraint
+                .parallelStream()
+                .filter(sp ->
+                      Math.abs(sp.getStorage().compareTo(storage)) <= 1
+                )
+                .collect(Collectors.toList());
 
-        if(remainder.isEmpty()) {
-            constraintsUsed[4] = false;
-            remainder = backTrack;
-        } else if(remainder.size() <= 5) {
-            return new ConstraintSatisfactionResult(remainder, constraintsUsed);
-        } else {
-            backTrack = remainder;
-        }
+        /*
+            Constraint Five
+        */
+        List<Smartphone> resolutionConstraint = storageConstraint
+                .parallelStream()
+                .filter(sp ->
+                      Math.abs(sp.getDisplayResolution().compareTo(resolution)) <= 1
+                )
+                .collect(Collectors.toList());
 
-        /* Constraint 5:
-            If the battery is in the greater 40 percentile, then the OS can't be Apple
-         */
-        if(battery.compareTo(NormalizedValue.THREE) < 0) {
-            reserve = smartphoneRepository.findByBrandNot(Brand.APPLE);
-            remainder.retainAll(reserve);
-        }
-        constraintsUsed[5] = true;
+        /*
+            Constraint Six
+        */
+        List<Smartphone> displaySizeConstraint = resolutionConstraint
+                .parallelStream()
+                .filter(sp ->
+                      Math.abs(sp.getDisplaySize().compareTo(displaySize)) <= 1
+                )
+                .collect(Collectors.toList());
 
-        if(remainder.isEmpty()) {
-            constraintsUsed[5] = false;
-            remainder = backTrack;
-        }
-
-        return new ConstraintSatisfactionResult(remainder, constraintsUsed);
+        return displaySizeConstraint;
     }
 }
 

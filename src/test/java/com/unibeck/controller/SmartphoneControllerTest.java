@@ -17,8 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by jbeckman on 6/17/2016.
@@ -75,17 +73,9 @@ public class SmartphoneControllerTest {
         );
 
 
-        ResponseEntity<ConstraintSatisfactionResult> result = smartphoneController.findSmartphonesRelatedTo(constraint);
-        ConstraintSatisfactionResult csr = result.getBody();
-        assertEquals(8, csr.getRemainder().size());
-
-        boolean[] constraintsUsed = csr.getConstraintsUsed();
-        assertTrue(constraintsUsed[0]);
-        assertTrue(constraintsUsed[1]);
-        assertTrue(constraintsUsed[2]);
-        assertTrue(constraintsUsed[3]);
-        assertTrue(constraintsUsed[4]);
-        assertTrue(constraintsUsed[5]);
+        ResponseEntity<List<Smartphone>> result = smartphoneController.findSmartphonesRelatedTo(constraint);
+        List<Smartphone> remainder = result.getBody();
+        assertEquals(2, remainder.size());
     }
 
     @Test
@@ -98,17 +88,9 @@ public class SmartphoneControllerTest {
         );
 
 
-        ResponseEntity<ConstraintSatisfactionResult> result = smartphoneController.findSmartphonesRelatedTo(constraint);
-        ConstraintSatisfactionResult csr = result.getBody();
-        assertEquals(1, csr.getRemainder().size());
-
-        boolean[] constraintsUsed = csr.getConstraintsUsed();
-        assertTrue(constraintsUsed[0]);
-        assertTrue(constraintsUsed[1]);
-        assertTrue(constraintsUsed[2]);
-        assertTrue(constraintsUsed[3]);
-        assertFalse(constraintsUsed[4]);
-        assertFalse(constraintsUsed[5]);
+        ResponseEntity<List<Smartphone>> result = smartphoneController.findSmartphonesRelatedTo(constraint);
+        List<Smartphone> remainder = result.getBody();
+        assertEquals(1, remainder.size());
     }
 
 //     new Smartphone()

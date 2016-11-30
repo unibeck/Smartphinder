@@ -14,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by jbeckman on 11/19/2016.
@@ -52,16 +50,8 @@ public class SmartphoneServiceTest {
                 Brand.SAMSUNG, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-        ConstraintSatisfactionResult csr = smartphoneService.findClosestMatching(constraint);
-        assertEquals(8, csr.getRemainder().size());
-
-        boolean[] constraintsUsed = csr.getConstraintsUsed();
-        assertTrue(constraintsUsed[0]);
-        assertTrue(constraintsUsed[1]);
-        assertTrue(constraintsUsed[2]);
-        assertTrue(constraintsUsed[3]);
-        assertTrue(constraintsUsed[4]);
-        assertTrue(constraintsUsed[5]);
+        List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
+        assertEquals(5, remainder.size());
     }
 
     @Test
@@ -73,15 +63,7 @@ public class SmartphoneServiceTest {
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-        ConstraintSatisfactionResult csr = smartphoneService.findClosestMatching(constraint);
-        assertEquals(1, csr.getRemainder().size());
-
-        boolean[] constraintsUsed = csr.getConstraintsUsed();
-        assertTrue(constraintsUsed[0]);
-        assertTrue(constraintsUsed[1]);
-        assertTrue(constraintsUsed[2]);
-        assertTrue(constraintsUsed[3]);
-        assertFalse(constraintsUsed[4]); // Backtracking here
-        assertFalse(constraintsUsed[5]); // And here
+        List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
+        assertEquals(1, remainder.size());
     }
 }

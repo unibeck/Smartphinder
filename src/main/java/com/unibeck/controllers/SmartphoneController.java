@@ -1,6 +1,5 @@
 package com.unibeck.controllers;
 
-import com.unibeck.model.ConstraintSatisfactionResult;
 import com.unibeck.model.Smartphone;
 import com.unibeck.model.UserConstraint;
 import com.unibeck.services.SmartphoneService;
@@ -28,14 +27,14 @@ public class SmartphoneController {
 
 	@RequestMapping(value = "/smartphone/constraint", method = RequestMethod.POST)
 	@ResponseStatus(value= HttpStatus.OK)
-	public ResponseEntity<ConstraintSatisfactionResult> findSmartphonesRelatedTo(@RequestBody @Valid UserConstraint userConstraint) {
+	public ResponseEntity<List<Smartphone>> findSmartphonesRelatedTo(@RequestBody @Valid UserConstraint userConstraint) {
 
-		ConstraintSatisfactionResult csr = smartphoneService.findClosestMatching(userConstraint);
+		List<Smartphone> remainder = smartphoneService.findClosestMatching(userConstraint);
 
-		if(csr.getRemainder().size() == 0) {
-			return new ResponseEntity<>((ConstraintSatisfactionResult) null, HttpStatus.NO_CONTENT);
+		if(remainder.size() == 0) {
+			return new ResponseEntity<>((List<Smartphone>) null, HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<>(csr, HttpStatus.OK);
+			return new ResponseEntity<>(remainder, HttpStatus.OK);
 		}
 	}
 

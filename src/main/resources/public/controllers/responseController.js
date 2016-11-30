@@ -4,8 +4,9 @@ angular.module('SmartPhinder').controller('ResponseCtrl', ['$scope', '$http', 'R
   $scope.loadingSmartphones = true;
 
   $scope.responseFactory = ResponseFactory;
-	$scope.$watch('responseFactory.getResponse()', function(newVal) {
-    $scope.smartphones = newVal.smartphones;
+	$scope.$watch('responseFactory.getSmartphones()', function(newVal) {
+    console.log(newVal);
+    $scope.smartphones = newVal;
 
     if(angular.isObject($scope.smartphones)) {
       $scope.loadingSmartphones = false;

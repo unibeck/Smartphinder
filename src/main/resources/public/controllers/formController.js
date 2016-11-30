@@ -68,7 +68,6 @@ angular.module('SmartPhinder').controller('FormCtrl', ['$scope', 'ResponseFactor
     ResponseFactory.submitConstraints($scope.userConstraint);
 
     $scope.smartphones = ResponseFactory.getSmartphones();
-    $scope.constraintsUsed = ResponseFactory.getConstraintsUsed();
   }
 
 }]);
