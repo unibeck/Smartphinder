@@ -1,8 +1,7 @@
 angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($http) {
 
 	var response = {
-    smartphones: null,
-		constraintsUsed: null
+    smartphones: null
 	};
 
 	var key = 'AIzaSyCsdZDC-n4T_ti327fVJg8cdSWs91AJ_Ig';
@@ -27,6 +26,7 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 						};
 
 					response.smartphones[i] = newSmartphone;
+					console.log(response.smartphones);
 				}
 			);
 	};
@@ -42,7 +42,7 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 
 		response.smartphones = {};
     for(var i = 0; i < count; i++) {
-      setSmartphoneObj(smartphones[i]['device-name']);
+      setSmartphoneObj(smartphones[i]['device-name'], i);
     }
 	};
 
@@ -62,23 +62,17 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 			$http.post("http://localhost:8080/smartphone/constraint", constraints, config)
 				.then(
 					function (result) {
-            createSmartphones(result.data.remainder);
-						response.constraintsUsed = result.data.constraintsUsed;
+            createSmartphones(result.data);
 					}
         );
 		},
 
 		resetResponse: function() {
       response.smartphones = null;
-      response.constraintsUsed = null;
 		},
 
 		getSmartphones: function() {
 			return response.smartphones;
-		},
-
-		getConstraintsUsed: function() {
-			return response.constraintsUsed;
 		},
 
 		getResponse: function() {

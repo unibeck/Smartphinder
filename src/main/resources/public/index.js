@@ -16,7 +16,7 @@ angular.module('SmartPhinder').controller('AppCtrl', ['$scope', 'ResponseFactory
 	$scope.showForm = true;
 	$scope.responseFactory = ResponseFactory;
 
-	$scope.$watch('responseFactory.getConstraintsUsed()', function(newVal) {
+	$scope.$watch('responseFactory.getSmartphones()', function(newVal) {
 		if(newVal) {
 			$scope.showForm = false;
 		} else {
