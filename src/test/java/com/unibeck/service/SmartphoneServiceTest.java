@@ -75,7 +75,7 @@ public class SmartphoneServiceTest {
             remainder = smartphoneService.findClosestMatching(constraint);
             LocalDateTime after = LocalDateTime.now();
 
-            System.out.printf("The algorithm took %d ms\n", ChronoUnit.MILLIS.between(before, after));
+            System.out.printf("%d\n", ChronoUnit.MILLIS.between(before, after));
         }
 
         assertEquals(1, remainder.size());
