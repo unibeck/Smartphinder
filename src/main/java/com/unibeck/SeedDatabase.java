@@ -39,32 +39,35 @@ public class SeedDatabase {
         for (Object obj : arr) {
             JSONObject p = (JSONObject) obj;
 
-            try {
-                newPhone = new Smartphone()
-                        .withName((String) p.get("device-name"))
-                        .withBrand(Brand.findByAbbr((String) p.get("brand")))
-                        .withOperatingSystem(OS.findByAbbr((String) p.get("os")))
-                        .withPrice(convertFromWithInt(Integer.valueOf((String) p.get("price")),
-                                per.getPricePercentile()))
-                        .withDisplaySize(convertFromWithDouble(Double.valueOf((String) p.get("display-size")),
-                                per.getDisplaySizePercentile()))
-                        .withDisplayResolution(convertFromWithInt(Integer.valueOf((String) p.get("resolution")),
-                                per.getDisplayResolutionPercentile()))
-                        .withRam(convertFromWithDouble(Double.valueOf((String) p.get("ram")),
-                                per.getRamPercentile()))
-                        .withStorage(convertFromWithInt(Integer.valueOf((String) p.get("storage")),
-                                per.getStoragePercentile()))
-                        .withBattery(convertFromWithInt(Integer.valueOf((String) p.get("battery")),
-                                per.getBatteryPercentile()))
-                        .withCamera(convertFromWithInt(Integer.valueOf((String) p.get("camera")),
-                                per.getCameraPercentile()));
+            for (int i = 0; i < 10; i++) {
 
-            } catch (Exception e){
-                System.out.println(p.toJSONString());
-                throw e;
+                try {
+                    newPhone = new Smartphone()
+                            .withName((String) p.get("device-name")+i)
+                            .withBrand(Brand.findByAbbr((String) p.get("brand")))
+                            .withOperatingSystem(OS.findByAbbr((String) p.get("os")))
+                            .withPrice(convertFromWithInt(Integer.valueOf((String) p.get("price")),
+                                    per.getPricePercentile()))
+                            .withDisplaySize(convertFromWithDouble(Double.valueOf((String) p.get("display-size")),
+                                    per.getDisplaySizePercentile()))
+                            .withDisplayResolution(convertFromWithInt(Integer.valueOf((String) p.get("resolution")),
+                                    per.getDisplayResolutionPercentile()))
+                            .withRam(convertFromWithDouble(Double.valueOf((String) p.get("ram")),
+                                    per.getRamPercentile()))
+                            .withStorage(convertFromWithInt(Integer.valueOf((String) p.get("storage")),
+                                    per.getStoragePercentile()))
+                            .withBattery(convertFromWithInt(Integer.valueOf((String) p.get("battery")),
+                                    per.getBatteryPercentile()))
+                            .withCamera(convertFromWithInt(Integer.valueOf((String) p.get("camera")),
+                                    per.getCameraPercentile()));
+
+                } catch (Exception e){
+                    System.out.println(p.toJSONString());
+                    throw e;
+                }
+
+                smartphoneRepository.save(newPhone);
             }
-
-            smartphoneRepository.save(newPhone);
         }
     }
 }
