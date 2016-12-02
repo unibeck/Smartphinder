@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -50,12 +52,16 @@ public class SmartphoneServiceTest {
                 Brand.SAMSUNG, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
+        LocalDateTime before = LocalDateTime.now();
         List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
-        assertEquals(5, remainder.size());
+        LocalDateTime after = LocalDateTime.now();
+        System.out.printf("The algorithm took %d ms\n", ChronoUnit.MILLIS.between(before, after));
+
+        assertEquals(2, remainder.size());
     }
 
     @Test
-    public void constraintWithBacktrackingWorks() throws Exception {
+    public void basicConstraintWithiOS() throws Exception {
         SeedDatabase seed = new SeedDatabase(smartphoneRepository);
         seed.seedSmartphones();
 
@@ -63,7 +69,11 @@ public class SmartphoneServiceTest {
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
+        LocalDateTime before = LocalDateTime.now();
         List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
+        LocalDateTime after = LocalDateTime.now();
+        System.out.printf("The algorithm took %d ms\n", ChronoUnit.MILLIS.between(before, after));
+        
         assertEquals(1, remainder.size());
     }
 }

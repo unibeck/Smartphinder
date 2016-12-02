@@ -40,14 +40,16 @@ public class SmartphoneService {
         int max = 0, temp = 0;
 
         for(int i = 0; i < allSmartphones.size(); i++) {
-            System.out.printf("\nDetermining constraint satisfaction for the %s\n", allSmartphones.get(i).getName());
+//            System.out.printf("\nDetermining constraint satisfaction for the %s\n", allSmartphones.get(i).getName());
             temp = findMostSatisfiedConstraints(tree, allSmartphones.get(i), "");
-            System.out.printf("%s satisfied %d constraints\n", allSmartphones.get(i).getName(), temp);
+//            System.out.printf("%s satisfied %d constraints\n", allSmartphones.get(i).getName(), temp);
 
-            //TODO: Add all smartphones that share the same number of satisfied constraints
-            if(temp > max) {
+            if (temp > max) {
                 max = temp;
+
                 remainder.clear();
+                remainder.add(allSmartphones.get(i));
+            } else if (temp == max) {
                 remainder.add(allSmartphones.get(i));
             }
         }
@@ -62,7 +64,7 @@ public class SmartphoneService {
         int numOfSatisfied;
 
         if (determineConstraintSatisfaction(tree.getConstraint(), sp)) {
-            System.out.printf("%s %s was satisfied\n", tabs, tree.getConstraint().getConstraintType());
+//            System.out.printf("%s %s was satisfied\n", tabs, tree.getConstraint().getConstraintType());
             numOfSatisfied = 1;
 
             if (tree.getChildren() != null) {
@@ -76,7 +78,7 @@ public class SmartphoneService {
 
             return numOfSatisfied;
         } else {
-            System.out.printf("%s %s was not satisfied\n", tabs, tree.getConstraint().getConstraintType());
+//            System.out.printf("%s %s was not satisfied\n", tabs, tree.getConstraint().getConstraintType());
             return 0;
         }
     }
