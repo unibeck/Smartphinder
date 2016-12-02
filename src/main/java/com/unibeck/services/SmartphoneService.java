@@ -29,7 +29,6 @@ public class SmartphoneService {
     }
 
     public List<Smartphone> findClosestMatching(UserConstraint uC) {
-//        List<Smartphone> allSmartphones = smartphoneRepository.findAll();
         List<Smartphone> allSmartphones = smartphoneRepository.findByOperatingSystem(uC.getOperatingSystem());
 
 

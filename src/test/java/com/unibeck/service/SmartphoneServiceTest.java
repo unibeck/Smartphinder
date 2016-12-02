@@ -52,11 +52,7 @@ public class SmartphoneServiceTest {
                 Brand.SAMSUNG, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-        LocalDateTime before = LocalDateTime.now();
         List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
-        LocalDateTime after = LocalDateTime.now();
-        System.out.printf("The algorithm took %d ms\n", ChronoUnit.MILLIS.between(before, after));
-
         assertEquals(2, remainder.size());
     }
 
@@ -69,11 +65,20 @@ public class SmartphoneServiceTest {
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-        LocalDateTime before = LocalDateTime.now();
         List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
-        LocalDateTime after = LocalDateTime.now();
-        System.out.printf("The algorithm took %d ms\n", ChronoUnit.MILLIS.between(before, after));
-        
+        assertEquals(1, remainder.size());
+    }
+
+    @Test
+    public void basicConstraintWithLowEndPhone() throws Exception {
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
+        seed.seedSmartphones();
+
+        UserConstraint constraint = new UserConstraint(
+                Brand.APPLE, OS.iOS, 256, 2000, 8, 2.0, 32, 278, 4.6
+        );
+
+        List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
         assertEquals(1, remainder.size());
     }
 }
