@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -59,11 +62,22 @@ public class SmartphoneServiceTest {
         SeedDatabase seed = new SeedDatabase(smartphoneRepository);
         seed.seedSmartphones();
 
+        System.out.printf("There are %d smartphones in the db\n", smartphoneRepository.count());
+
         UserConstraint constraint = new UserConstraint(
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-        List<Smartphone> remainder = smartphoneService.findClosestMatching(constraint);
+
+        List<Smartphone> remainder = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            LocalDateTime before = LocalDateTime.now();
+            remainder = smartphoneService.findClosestMatching(constraint);
+            LocalDateTime after = LocalDateTime.now();
+
+            System.out.printf("The algorithm took %d ms\n", ChronoUnit.MILLIS.between(before, after));
+        }
+
         assertEquals(1, remainder.size());
     }
 }
