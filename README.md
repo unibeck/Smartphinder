@@ -9,5 +9,5 @@
 
 4. It should start the Spring application. Once it is started, open any browser and type in: "http://localhost:8080/"
 
-5. The applicatinon will start working on localhost:8080
+5. The application will start working on localhost:8080. In case, it is not, you can check Spring logs in the IDE and see what's going wrong with it. 
 
