@@ -2,6 +2,8 @@ package com.unibeck.service;
 
 import com.unibeck.SeedDatabase;
 import com.unibeck.model.*;
+import com.unibeck.repository.InventoryRepository;
+import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
 import com.unibeck.services.SmartphoneService;
 import org.junit.Before;
@@ -26,11 +28,18 @@ public class SmartphoneServiceTest {
 
     @Autowired
     private SmartphoneRepository smartphoneRepository;
+    @Autowired
+    private InventoryRepository inventoryRepository;
+    @Autowired
+    private LocationRepository locationRepository;
 
+    private SeedDatabase seed;
     private SmartphoneService smartphoneService;
 
     @Before
     public void setItUp() {
+        seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+
         smartphoneRepository.deleteAll();
 
         smartphoneService = new SmartphoneService(smartphoneRepository);
@@ -45,8 +54,7 @@ public class SmartphoneServiceTest {
 
     @Test
     public void basicConstraintWithAndroid() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.SAMSUNG, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
@@ -58,8 +66,8 @@ public class SmartphoneServiceTest {
 
     @Test
     public void basicConstraintWithiOS() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        SeedDatabase seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+        seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
@@ -71,8 +79,7 @@ public class SmartphoneServiceTest {
 
     @Test
     public void basicConstraintWithLowEndPhone() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.APPLE, OS.iOS, 256, 2000, 8, 2.0, 32, 278, 4.6

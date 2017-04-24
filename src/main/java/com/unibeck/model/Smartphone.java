@@ -12,9 +12,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Smartphone {
 
-    @JsonInclude(value= JsonInclude.Include.NON_NULL)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
     @NotNull

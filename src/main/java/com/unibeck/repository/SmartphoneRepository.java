@@ -16,7 +16,7 @@ import java.util.List;
  * Created by jbeckman on 11/18/16.
  */
 @Repository
-public interface SmartphoneRepository extends PagingAndSortingRepository<Smartphone, String> {
+public interface SmartphoneRepository extends PagingAndSortingRepository<Smartphone, Long> {
     List<Smartphone> findAll();
 
     List<Smartphone> findByOperatingSystem(OS os);

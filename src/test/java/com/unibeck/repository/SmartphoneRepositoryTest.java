@@ -1,10 +1,7 @@
 package com.unibeck.repository;
 
 import com.unibeck.SeedDatabase;
-import com.unibeck.model.Brand;
-import com.unibeck.model.NormalizedValue;
-import com.unibeck.model.OS;
-import com.unibeck.model.Smartphone;
+import com.unibeck.model.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,9 +26,17 @@ public class SmartphoneRepositoryTest {
 
     @Autowired
     private SmartphoneRepository smartphoneRepository;
+    @Autowired
+    private InventoryRepository inventoryRepository;
+    @Autowired
+    private LocationRepository locationRepository;
+
+    private SeedDatabase seed;
 
     @Before
     public void setup() {
+        seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+
         smartphoneRepository.deleteAll();
     }
 
@@ -65,16 +70,14 @@ public class SmartphoneRepositoryTest {
 
     @Test
     public void largerSmartphoneRepo() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        seed.seedTables();
 
         assertEquals(61, smartphoneRepository.count());
     }
 
     @Test
     public void filteringBySmartphoneFieldWorks() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        seed.seedTables();
 
         //We can use this test to hone in on the percentile, one fifth of the repository should be the size of each percentile
         //Thus this test should result in 17 smartphones from the first and second percentile

@@ -4,6 +4,8 @@ package com.unibeck.controller;
 import com.unibeck.SeedDatabase;
 import com.unibeck.controllers.SmartphoneController;
 import com.unibeck.model.*;
+import com.unibeck.repository.InventoryRepository;
+import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
 import com.unibeck.services.SmartphoneService;
 import org.junit.Before;
@@ -28,12 +30,19 @@ public class SmartphoneControllerTest {
     @Autowired
     private SmartphoneRepository smartphoneRepository;
     @Autowired
+    private InventoryRepository inventoryRepository;
+    @Autowired
+    private LocationRepository locationRepository;
+    @Autowired
     private SmartphoneService smartphoneService;
 
+    private SeedDatabase seed;
     private SmartphoneController smartphoneController;
 
     @Before
     public void setItUp() {
+        seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+
         smartphoneRepository.deleteAll();
 
         smartphoneService = new SmartphoneService(smartphoneRepository);
@@ -65,8 +74,7 @@ public class SmartphoneControllerTest {
 
     @Test
     public void findSmartphonesWithConstraintSatisfaction() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.GOOGLE, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
@@ -80,8 +88,7 @@ public class SmartphoneControllerTest {
 
     @Test
     public void constraintSatisfactionWithBackTracking() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository);
-        seed.seedSmartphones();
+        seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5

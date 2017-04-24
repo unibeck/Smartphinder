@@ -1,13 +1,41 @@
 # Constraint Satisfaction for Smartphone buying
 
-### Run the project:
-1. Install gradle on your computer
+## What is this?
 
-2. Link your gradle and ConstraintSatisfaction project folder together. You can do so by point the gradle directory to the bin folder. 
+This is a full-stack application that was a school project, but also showcases a few skills. This project
+shows my familiarity with popular frameworks, language build patterns, decently clean code (though it could
+be improved), and testing. While this isn't a full-blown and fleshed out applications, it does touch many 
+facets of a would be production application. A very interesting addition to this application is a unique
+implementation of a constraint satisfaction based algorithm. I implore you to look into the algorithm 
+section along with the source code.
 
-3. Once everthing is connected, run ConstraintSatisfactionSmartphoneApplication under: "src/main/java/com.unibeck/ConstraintSatisfactionSmartphoneApplication"
+## The Stack
 
-4. It should start the Spring application. Once it is started, open any browser and type in: "http://localhost:8080/"
+The main framework that encapsulates the all facets of the project is Spring Boot. Spring Boot was chosen for
+its vast array of features and implementations with other libraries, even though only a fraction are used here.
+As for the database, the project uses PostgreSQL because that's what I prefer for a relational database and am
+familiar with. When it comes to the front-end, Spring Boot provides a Tomcat instance to host the webapp. The 
+webapp is built with the JavaScript language and AngularJS framework. 
 
-5. The application will start working on localhost:8080. In case, it is not, you can check Spring logs in the IDE and see what's going wrong with it. 
+## The Algorithm
 
+As mentioned above, the search algorithm that I've created is based on constraint satisfaction and more 
+specifically using backtracking. Here are the three main steps
+
+1) Given constraints provided by the user, I construct a tree based on all permutations of the constraints.
+
+2) With a smartphone data set, I iterate through each smartphone and determine how much does it satisfy the
+constraint tree. To calculate this, I traverse through the constraint tree in a depth-first search manner and
+find the maximum depth that the smartphone satisfied. This way if a smartphone doesn’t pass some child 
+constraint, the algorithm will backtrack to its’ parent and attempt the other children. This helps to eliminate 
+all of the subsequent children states from being visited and thus saves computational time.
+
+3) Keep a collection of the smartphone(s) that most satisfy the user constraint tree.
+
+## Getting Started
+
+Per any other typical Gradle and Spring Boot project, the fastest way to get started is to run 
+`./gradlew bootRun`. From a high level this will build the project and execute the jar. You can ensure this 
+by accessing `localhost:8080` in a browser (preferably Chrome as that is the only one that this project was 
+developed on and thus supported). To run a complete Gradle build cycle that includes tests simply run 
+`./gradlew build`.

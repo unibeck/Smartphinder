@@ -12,7 +12,7 @@ import static com.unibeck.model.Percentiles.convertFromWithDouble;
 import static com.unibeck.model.Percentiles.convertFromWithInt;
 
 /**
- * Created by jbeckman on 11/18/16.
+ * Created by jbeckman on 1/18/17.
  */
 @Service
 public class SmartphoneService {
@@ -142,7 +142,7 @@ public class SmartphoneService {
         ConstraintTree tree = new ConstraintTree(new ArrayList<>(), headConstraint);
 
         constraints.remove(headConstraint);
-        if(constraints.size() > 0) {
+        if (constraints.size() > 0) {
             constraints.forEach(c -> {
                 ConstraintTree subTree = buildConstraintTree(c, new ArrayList<>(constraints));
                 tree.addChild(subTree);
