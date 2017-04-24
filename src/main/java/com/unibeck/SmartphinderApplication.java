@@ -9,10 +9,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
-public class ConstraintSatisfactionSmartphoneApplication {
+public class SmartphinderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConstraintSatisfactionSmartphoneApplication.class, args);
+		SpringApplication.run(SmartphinderApplication.class, args);
 	}
 
 	@Bean
