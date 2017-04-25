@@ -5,7 +5,6 @@ angular.module('SmartPhinder').controller('ResponseCtrl', ['$scope', '$http', 'R
     $scope.responseFactory = ResponseFactory;
 
     $scope.$watch('responseFactory.getInventory()', function(newVal) {
-        console.log(newVal);
         $scope.inventory = newVal;
 
         if (angular.isObject($scope.inventory)) {
@@ -17,5 +16,17 @@ angular.module('SmartPhinder').controller('ResponseCtrl', ['$scope', '$http', 'R
 
     $scope.resetResponse = function() {
         ResponseFactory.resetResponse();
+    }
+
+    $scope.buySmartphone = function(index) {
+        if ($scope.inventory[index].stock < 1) {
+            return;
+        }
+        $scope.inventory[index].stock--;
+
+        ResponseFactory.buySmartphone(
+                $scope.inventory[index].smartphone.id,
+                $scope.inventory[index].location.city,
+                $scope.inventory[index].location.state);
     }
 }]);

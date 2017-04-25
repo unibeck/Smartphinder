@@ -52,7 +52,6 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
                     itemLocation.longitude - response.userLocation.longitude,
                     itemLocation.latitude - response.userLocation.latitude);
 
-		console.log("The distance is " + distance);
 		if (distance <= 16) {
 		    return "1";
 		} else if (distance <= 32) {
@@ -66,13 +65,10 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 
 	return {
 		submitConstraints: function(constraints) {
-			if(!angular.isObject(constraints)) {
+			if (!angular.isObject(constraints)) {
 				console.log("The constraints provided are not valid");
 				return;
 			};
-
-            var city = "Phoenix";
-            var state = "Arizona";
 
 			$http({
 			    url: "/smartphone/constraint",
@@ -83,8 +79,22 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 			    })
 				.then(function (result) {
                     createInventory(result.data);
-                });
+            });
 		},
+
+		buySmartphone: function(smartphoneId, city, state) {
+		    if (smartphoneId == null) {
+				console.log("The smartphoneId provided are not valid");
+				return;
+			};
+
+			$http({
+			    url: "/smartphone/" + smartphoneId + "/buy",
+			    method: "POST",
+			    params: {"city": city, "state": state},
+			    header: {'Content-Type': 'application/json'}
+            });
+        },
 
 		resetResponse: function() {
 		    response.inventory = null;

@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends PagingAndSortingRepository<Location, Long> {
     List<Location> findAll();
-    List<Location> findByCityAndState(String city, String state);
+    Location findByCityAndState(String city, String state);
 }

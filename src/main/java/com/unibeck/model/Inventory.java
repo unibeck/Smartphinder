@@ -56,11 +56,11 @@ public class Inventory {
         this.location = location;
     }
 
-    public int getNumInStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setNumInStock(int stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 

@@ -2,6 +2,7 @@ package com.unibeck.repository;
 
 
 import com.unibeck.model.Inventory;
+import com.unibeck.model.Location;
 import com.unibeck.model.Smartphone;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,5 @@ import java.util.List;
 @Repository
 public interface InventoryRepository extends PagingAndSortingRepository<Inventory, Long> {
     List<Inventory> findBySmartphone(Smartphone smartphone);
+    Inventory findBySmartphoneAndLocation(Smartphone smartphone, Location location);
 }

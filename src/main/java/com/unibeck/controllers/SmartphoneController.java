@@ -29,7 +29,8 @@ public class SmartphoneController {
 	@RequestMapping(value = "/smartphone/constraint", method = RequestMethod.POST, params = {"city", "state"})
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<List<Inventory>> findSmartphonesRelatedTo(@RequestBody UserConstraint userConstraint,
-			@RequestParam(value = "city") String city, @RequestParam(value = "state") String state) {
+																	@RequestParam(value = "city") String city,
+																	@RequestParam(value = "state") String state) {
 
 		List<Inventory> remainder = smartphoneService.findMatchingInventory(userConstraint, city, state);
 
@@ -38,6 +39,14 @@ public class SmartphoneController {
 		} else {
 			return new ResponseEntity<>(remainder, HttpStatus.OK);
 		}
+	}
+
+	@RequestMapping(value = "/smartphone/{smartphoneId}/buy", method = RequestMethod.POST, params = {"city", "state"})
+	public void buySmartphone(@PathVariable long smartphoneId,
+							  @RequestParam(value = "city") String city,
+							  @RequestParam(value = "state") String state) {
+
+		smartphoneService.buySmartphone(smartphoneId, city, state);
 	}
 
 	@RequestMapping(value = "/smartphones", method = RequestMethod.GET)

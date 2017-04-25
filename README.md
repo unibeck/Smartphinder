@@ -40,3 +40,9 @@ by accessing `localhost:8080` in a browser (preferably Chrome as that is the onl
 developed on and thus supported). If you would like to seed the database with real data add 
 `-Dspring.profiles.active=prod` to the above gradle command. To run a complete Gradle build cycle that 
 includes tests simply run `./gradlew build`.
+
+## Some Queries
+
+select * from smartphone where lower(name) like '%nexus%';
+select * from inventory where smartphone_id = 33;
+

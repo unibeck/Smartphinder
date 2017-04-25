@@ -12,13 +12,13 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{item.smartphone['device-name']}}</span>
-            <p class="inventory-info">{{item.numInStock}} in stock</p>
+            <p class="inventory-info">{{item.stock}} in stock</p>
             <p class="inventory-info">From {{item.location.city}}, {{item.location.state}}</p>
             <p class="inventory-info">{{item['transit-duration']}} business days</p>
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button>Buy</md-button>
+          <md-button ng-click="buySmartphone($index)">Buy</md-button>
         </md-card-actions>
       </md-card>
     </div>

@@ -44,10 +44,10 @@ public class SmartphoneService {
         List<Smartphone> allSmartphones = smartphoneRepository.findAll();
         List<Smartphone> remainder = constraintSatisfactionAlgorithm.findClosestMatching(userConstraint, allSmartphones);
 
-        List<Location> userLocation = locationRepository.findByCityAndState(city, state);
+        Location userLocation = locationRepository.findByCityAndState(city, state);
 
         return remainder.stream()
-                .map(smartphone -> determineInventory(smartphone, userLocation.get(0)))
+                .map(smartphone -> determineInventory(smartphone, userLocation))
                 .collect(Collectors.toList());
     }
 
@@ -69,5 +69,19 @@ public class SmartphoneService {
                 .get();
 
         return closestInventory;
+    }
+
+    public void buySmartphone(long smartphoneId, String city, String state) {
+        Smartphone smartphone = smartphoneRepository.findOne(smartphoneId);
+        Location location = locationRepository.findByCityAndState(city, state);
+
+        if (smartphone == null || location == null) {
+            throw new IllegalStateException("Won't be able to find the inventory of smartphone [" + smartphone +
+                    "] and location [" + location + "]");
+        }
+
+        Inventory smartphoneInventory = inventoryRepository.findBySmartphoneAndLocation(smartphone, location);
+        smartphoneInventory.withStock(smartphoneInventory.getStock() - 1);
+        inventoryRepository.save(smartphoneInventory);
     }
 }
