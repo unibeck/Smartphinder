@@ -1,21 +1,21 @@
 angular.module('SmartPhinder').controller('ResponseCtrl', ['$scope', '$http', 'ResponseFactory', function($scope, $http, ResponseFactory) {
 
-  $scope.smartphones = [];
-  $scope.loadingSmartphones = true;
+    $scope.inventory = [];
+    $scope.loadingInventory = true;
+    $scope.responseFactory = ResponseFactory;
 
-  $scope.responseFactory = ResponseFactory;
-	$scope.$watch('responseFactory.getSmartphones()', function(newVal) {
-    console.log(newVal);
-    $scope.smartphones = newVal;
+    $scope.$watch('responseFactory.getInventory()', function(newVal) {
+        console.log(newVal);
+        $scope.inventory = newVal;
 
-    if(angular.isObject($scope.smartphones)) {
-      $scope.loadingSmartphones = false;
-    } else {
-      $scope.loadingSmartphones = true;
+        if (angular.isObject($scope.inventory)) {
+            $scope.loadingInventory = false;
+        } else {
+            $scope.loadingInventory = true;
+        }
+    });
+
+    $scope.resetResponse = function() {
+        ResponseFactory.resetResponse();
     }
-  });
-
-  $scope.resetResponse = function() {
-    ResponseFactory.resetResponse();
-  }
 }]);

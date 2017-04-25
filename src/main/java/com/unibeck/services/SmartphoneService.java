@@ -1,15 +1,17 @@
 package com.unibeck.services;
 
-import com.unibeck.model.*;
+import com.unibeck.model.Inventory;
+import com.unibeck.model.Location;
+import com.unibeck.model.Smartphone;
+import com.unibeck.model.UserConstraint;
+import com.unibeck.repository.InventoryRepository;
+import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.unibeck.model.Percentiles.convertFromWithDouble;
-import static com.unibeck.model.Percentiles.convertFromWithInt;
+import java.util.stream.Collectors;
 
 /**
  * Created by jbeckman on 1/18/17.
@@ -17,149 +19,55 @@ import static com.unibeck.model.Percentiles.convertFromWithInt;
 @Service
 public class SmartphoneService {
 
+    private ConstraintSatisfactionAlgorithm constraintSatisfactionAlgorithm;
     private SmartphoneRepository smartphoneRepository;
+    private InventoryRepository inventoryRepository;
+    private LocationRepository locationRepository;
 
     @Autowired
-    public SmartphoneService(SmartphoneRepository smartphoneRepository) {
+    public SmartphoneService(ConstraintSatisfactionAlgorithm constraintSatisfactionAlgorithm,
+                             SmartphoneRepository smartphoneRepository,
+                             InventoryRepository inventoryRepository,
+                             LocationRepository locationRepository) {
+
+        this.constraintSatisfactionAlgorithm = constraintSatisfactionAlgorithm;
         this.smartphoneRepository = smartphoneRepository;
+        this.inventoryRepository = inventoryRepository;
+        this.locationRepository = locationRepository;
     }
 
     public List<Smartphone> getAllSmartphones() {
         return smartphoneRepository.findAll();
     }
 
-    public List<Smartphone> findClosestMatching(UserConstraint uC) {
-        List<Smartphone> allSmartphones = smartphoneRepository.findByOperatingSystem(uC.getOperatingSystem());
+    public List<Inventory> findMatchingInventory(UserConstraint userConstraint, String city, String state) {
+        List<Smartphone> allSmartphones = smartphoneRepository.findAll();
+        List<Smartphone> remainder = constraintSatisfactionAlgorithm.findClosestMatching(userConstraint, allSmartphones);
 
+        List<Location> userLocation = locationRepository.findByCityAndState(city, state);
 
-        List<Constraint> constraints = buildConstraints(uC); //All of the constraints and their values
-        ConstraintTree tree = buildConstraintTree(constraints.get(0), constraints); //Tree with all permutations of constraints
-
-        List<Smartphone> remainder = new ArrayList<>();
-        int max = 0, temp = 0;
-
-        for(int i = 0; i < allSmartphones.size(); i++) {
-//            System.out.printf("\nDetermining constraint satisfaction for the %s\n", allSmartphones.get(i).getName());
-            temp = findMostSatisfiedConstraints(tree, allSmartphones.get(i), "");
-//            System.out.printf("%s satisfied %d constraints\n", allSmartphones.get(i).getName(), temp);
-
-            if (temp > max) {
-                max = temp;
-
-                remainder.clear();
-                remainder.add(allSmartphones.get(i));
-            } else if (temp == max) {
-                remainder.add(allSmartphones.get(i));
-            }
-        }
-
-        return remainder;
+        return remainder.stream()
+                .map(smartphone -> determineInventory(smartphone, userLocation.get(0)))
+                .collect(Collectors.toList());
     }
 
-    /*
-        This is a depth-first-search of the ConstraintTree param
-     */
-    private int findMostSatisfiedConstraints(ConstraintTree tree, Smartphone sp, String tabs) {
-        int numOfSatisfied;
+    private Inventory determineInventory(Smartphone smartphone, Location userLocation) {
+        List<Inventory> warehousesWithSmartphone = inventoryRepository.findBySmartphone(smartphone);
 
-        if (determineConstraintSatisfaction(tree.getConstraint(), sp)) {
-//            System.out.printf("%s %s was satisfied\n", tabs, tree.getConstraint().getConstraintType());
-            numOfSatisfied = 1;
+        Inventory closestInventory = warehousesWithSmartphone.stream()
+                .reduce((inventory1, inventory2) -> {
+                    double distance1 = Math.sqrt(
+                            Math.pow((inventory1.getLocation().getLatitude() - userLocation.getLatitude()), 2) +
+                            Math.pow((inventory1.getLocation().getLongitude() - userLocation.getLongitude()), 2));
 
-            if (tree.getChildren() != null) {
-                for (int i = 0; i < tree.getChildren().size(); i++) {
-                    int temp = findMostSatisfiedConstraints(tree.getChildren().get(i), sp, tabs+"\t");
-                    if (temp >= numOfSatisfied) {
-                        numOfSatisfied = temp + 1;
-                    }
-                }
-            }
+                    double distance2 = Math.sqrt(
+                            Math.pow((inventory2.getLocation().getLatitude() - userLocation.getLatitude()), 2) +
+                            Math.pow((inventory2.getLocation().getLongitude() - userLocation.getLongitude()), 2));
 
-            return numOfSatisfied;
-        } else {
-//            System.out.printf("%s %s was not satisfied\n", tabs, tree.getConstraint().getConstraintType());
-            return 0;
-        }
-    }
+                    return distance1 > distance2 ? inventory1 : inventory2;
+                })
+                .get();
 
-    private boolean determineConstraintSatisfaction(Constraint constraint, Smartphone sp) {
-        switch (constraint.getConstraintType()) {
-            case HEAD_TAUTOLOGY:
-                return true;
-            case BATTERY:
-                return constraint.getValue() == sp.getBattery();
-            case CAMERA:
-                return constraint.getValue() == sp.getCamera();
-            case DISPLAY_SIZE:
-                return constraint.getValue() == sp.getDisplaySize();
-            case PRICE:
-                return constraint.getValue() == sp.getPrice();
-            case RAM:
-                return constraint.getValue() == sp.getRam();
-            case RESOLUTION:
-                return constraint.getValue() == sp.getDisplayResolution();
-            case STORAGE:
-                return constraint.getValue() == sp.getStorage();
-            default:
-                return false;
-        }
-    }
-
-    private List<Constraint> buildConstraints(UserConstraint uC) {
-        Percentiles per = new Percentiles();
-        NormalizedValue price = convertFromWithInt(uC.getPrice(), per.getPricePercentile());
-        NormalizedValue battery = convertFromWithInt(uC.getBattery(), per.getBatteryPercentile());
-        NormalizedValue camera = convertFromWithInt(uC.getCamera(), per.getCameraPercentile());
-        NormalizedValue ram = convertFromWithDouble(uC.getRam(), per.getRamPercentile());
-        NormalizedValue storage = convertFromWithInt(uC.getStorage(), per.getStoragePercentile());
-        NormalizedValue resolution = convertFromWithInt(uC.getResolution(), per.getDisplayResolutionPercentile());
-        NormalizedValue displaySize = convertFromWithDouble(uC.getDisplaySize(), per.getDisplaySizePercentile());
-
-        Constraint headTautology = new Constraint(ConstraintType.HEAD_TAUTOLOGY, NormalizedValue.FIVE);
-        Constraint batteryConstraint = new Constraint(ConstraintType.BATTERY, battery);
-        Constraint cameraConstraint = new Constraint(ConstraintType.CAMERA, camera);
-        Constraint displaySizeConstraint = new Constraint(ConstraintType.DISPLAY_SIZE, displaySize);
-        Constraint priceConstraint = new Constraint(ConstraintType.PRICE, price);
-        Constraint ramConstraint = new Constraint(ConstraintType.RAM, ram);
-        Constraint storageConstraint = new Constraint(ConstraintType.STORAGE, storage);
-        Constraint resolutionConstraint = new Constraint(ConstraintType.RESOLUTION, resolution);
-
-        return new ArrayList<Constraint>() {
-            {
-                add(headTautology);
-                add(batteryConstraint);
-                add(cameraConstraint);
-                add(displaySizeConstraint);
-                add(priceConstraint);
-                add(ramConstraint);
-                add(resolutionConstraint);
-                add(storageConstraint);
-            }
-        };
-    }
-
-    private ConstraintTree buildConstraintTree(Constraint headConstraint, List<Constraint> constraints) {
-        ConstraintTree tree = new ConstraintTree(new ArrayList<>(), headConstraint);
-
-        constraints.remove(headConstraint);
-        if (constraints.size() > 0) {
-            constraints.forEach(c -> {
-                ConstraintTree subTree = buildConstraintTree(c, new ArrayList<>(constraints));
-                tree.addChild(subTree);
-            });
-        } else {
-            tree.setChildren(null);
-        }
-
-        return tree;
+        return closestInventory;
     }
 }
-
-//    List<Smartphone> remainder = csSmartphones
-//            .stream()
-//            .filter(sp ->
-//                    sp.getPrice().ordinal() + sp.getCamera().ordinal() == price.ordinal() + camera.ordinal() &&
-//                            sp.getDisplaySize().ordinal() + sp.getBattery().ordinal() == displaySize.ordinal() + battery.ordinal() &&
-//                            sp.getDisplayResolution().ordinal() + sp.getPrice().ordinal() == resolution.ordinal() + price.ordinal()
-//            )
-//            .collect(Collectors.toList());

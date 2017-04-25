@@ -61,13 +61,10 @@ angular.module('SmartPhinder').controller('FormCtrl', ['$scope', 'ResponseFactor
     return (count * 11) + 1;
   };
 
-  $scope.smartphones = undefined;
   $scope.constraintsUsed = undefined;
 
   $scope.submitConstraints = function() {
     ResponseFactory.submitConstraints($scope.userConstraint);
-
-    $scope.smartphones = ResponseFactory.getSmartphones();
   }
 
 }]);

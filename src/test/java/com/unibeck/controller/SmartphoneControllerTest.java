@@ -36,8 +36,8 @@ public class SmartphoneControllerTest {
     @Autowired
     private SmartphoneService smartphoneService;
 
-    private SeedDatabase seed;
     private SmartphoneController smartphoneController;
+    private SeedDatabase seed;
 
     @Before
     public void setItUp() {
@@ -45,7 +45,6 @@ public class SmartphoneControllerTest {
 
         smartphoneRepository.deleteAll();
 
-        smartphoneService = new SmartphoneService(smartphoneRepository);
         smartphoneController = new SmartphoneController(smartphoneService);
     }
 
@@ -75,29 +74,31 @@ public class SmartphoneControllerTest {
     @Test
     public void findSmartphonesWithConstraintSatisfaction() throws Exception {
         seed.seedTables();
+        Location userLocation = locationRepository.findAll().stream().findAny().get();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.GOOGLE, OS.ANDROID, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-
-        ResponseEntity<List<Smartphone>> result = smartphoneController.findSmartphonesRelatedTo(constraint);
-        List<Smartphone> remainder = result.getBody();
+        ResponseEntity<List<Inventory>> result = smartphoneController.findSmartphonesRelatedTo(
+                constraint, userLocation.getCity(), userLocation.getState());
+        List<Inventory> remainder = result.getBody();
         assertEquals(2, remainder.size());
     }
 
     @Test
     public void constraintSatisfactionWithBackTracking() throws Exception {
         seed.seedTables();
+        Location userLocation = locationRepository.findAll().stream().findAny().get();
 
         UserConstraint constraint = new UserConstraint(
                 Brand.APPLE, OS.iOS, 799, 3450, 12, 4.0, 128, 534, 5.5
         );
 
-
-        ResponseEntity<List<Smartphone>> result = smartphoneController.findSmartphonesRelatedTo(constraint);
-        List<Smartphone> remainder = result.getBody();
-        assertEquals(1, remainder.size());
+        ResponseEntity<List<Inventory>> result = smartphoneController.findSmartphonesRelatedTo(
+                constraint, userLocation.getCity(), userLocation.getState());
+        List<Inventory> remainder = result.getBody();
+        assertEquals(2, remainder.size());
     }
 
 //     new Smartphone()

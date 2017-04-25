@@ -37,5 +37,6 @@ all of the subsequent children states from being visited and thus saves computat
 Per any other typical Gradle and Spring Boot project, the fastest way to get started is to run 
 `./gradlew bootRun`. From a high level this will build the project and execute the jar. You can ensure this 
 by accessing `localhost:8080` in a browser (preferably Chrome as that is the only one that this project was 
-developed on and thus supported). To run a complete Gradle build cycle that includes tests simply run 
-`./gradlew build`.
+developed on and thus supported). If you would like to seed the database with real data add 
+`-Dspring.profiles.active=prod` to the above gradle command. To run a complete Gradle build cycle that 
+includes tests simply run `./gradlew build`.

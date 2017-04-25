@@ -4,14 +4,14 @@ import com.unibeck.model.*;
 import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +24,8 @@ import static com.unibeck.model.Percentiles.convertFromWithInt;
  * Created by jbeckman on 11/20/16.
  */
 @Component
-public class SeedDatabase {
+@Profile("prod")
+public class SeedDatabase implements CommandLineRunner {
     private SmartphoneRepository smartphoneRepository;
     private InventoryRepository inventoryRepository;
     private LocationRepository locationRepository;
@@ -39,11 +40,14 @@ public class SeedDatabase {
         this.locationRepository = locationRepository;
     }
 
-    @PostConstruct
-    public void seedTables() throws Exception {
+    public void run(String... args) {
         seedLocation();
         seedSmartphones();
         seedInventory();
+    }
+
+    public void seedTables() {
+        run("");
     }
 
     private void seedLocation() {
@@ -111,12 +115,18 @@ public class SeedDatabase {
         locationRepository.save(newLocation);
     }
 
-    private void seedSmartphones() throws Exception {
+    private void seedSmartphones() {
         Smartphone newPhone;
         Percentiles per = new Percentiles();
 
         JSONParser parser = new JSONParser();
-        JSONArray arr = (JSONArray) parser.parse(new FileReader("src/main/resources/smartphone.json"));
+        JSONArray arr;
+
+        try {
+            arr = (JSONArray) parser.parse(new FileReader("src/main/resources/smartphone.json"));
+        } catch (Exception e) {
+            throw new IllegalStateException();
+        }
 
         for (Object obj : arr) {
             JSONObject p = (JSONObject) obj;
@@ -151,7 +161,7 @@ public class SeedDatabase {
             int numberOfLocations = new Random().ints(1, 4).limit(10).findAny().getAsInt();
             Collections.shuffle(locations);
 
-            while (--numberOfLocations > 0) {
+            while (numberOfLocations-- > 0) {
                 int stockNum = new Random().ints(1, 10).limit(10).findAny().getAsInt();
 
                 Inventory inventory = new Inventory()

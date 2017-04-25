@@ -1,21 +1,24 @@
 <link rel="stylesheet" href="../styles/response.css">
 <div layout="column" layout-align="center center" style="width: 100%; height 100%">
 
-  <div ng-if="loadingSmartphones">
+  <div ng-if="loadingInventory">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   </div>
 
-  <div layout="row" layout-align="center center" style="width: 100%; height 100%" ng-if="!loadingSmartphones">
-    <div ng-repeat="sp in smartphones" flex="25">
+  <div layout="row" layout-align="center center" style="width: 100%; height 100%" ng-if="!loadingInventory">
+    <div ng-repeat="item in inventory" flex="25">
       <md-card style="padding: 8px">
-        <div ng-style="{'background-image': 'url(' + sp.imgUrl + ')'}" class="card-img"></div>
+        <div ng-style="{'background-image': 'url(' + item.imgUrl + ')'}" class="card-img"></div>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">{{sp.name}}</span>
+            <span class="md-headline">{{item.smartphone['device-name']}}</span>
+            <p class="inventory-info">{{item.numInStock}} in stock</p>
+            <p class="inventory-info">From {{item.location.city}}, {{item.location.state}}</p>
+            <p class="inventory-info">{{item['transit-duration']}} business days</p>
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button>Learn More</md-button>
+          <md-button>Buy</md-button>
         </md-card-actions>
       </md-card>
     </div>

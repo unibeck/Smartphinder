@@ -1,49 +1,67 @@
 angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($http) {
 
 	var response = {
-    smartphones: null
+        inventory: null,
+        userLocation: {
+            "city": "Phoenix",
+            "state": "Arizona",
+            "longitude": "33.45",
+            "latitude": "-122.07"
+        }
 	};
 
-	var key = 'AIzaSyCsdZDC-n4T_ti327fVJg8cdSWs91AJ_Ig';
-  var cx = '011401687234119170726:ze8oydtvimo';
+    var key = 'AIzaSyCsdZDC-n4T_ti327fVJg8cdSWs91AJ_Ig';
+    var cx = '011401687234119170726:ze8oydtvimo';
 
-  var searchUrl = 'https://www.googleapis.com/customsearch/v1?key='+
+    var searchUrl = 'https://www.googleapis.com/customsearch/v1?key='+
         key+'&cx='+cx+'&searchType=image&num=1&imgType=photo&q=';
 
-	var setSmartphoneObj = function(name, i) {
-		$http.get(searchUrl+name)
-			.then(
-				function (result) {
-					// response.smartphones[i] = {};
-					//
-					// response.smartphones[i].name = name;
-					// response.smartphones[i].imgUrl = result.data.items[0].link;
+	var setInventoryIndex = function(item, i) {
+		$http.get(searchUrl + item.smartphone['device-name'])
+			.then(function (result) {
+                item.imgUrl = result.data.items[0].link;
+                item['transit-duration'] = getDuration(item.location);
 
-					var newSmartphone =
-						{
-							"name": name,
-							"imgUrl": result.data.items[0].link
-						};
-
-					response.smartphones[i] = newSmartphone;
-					console.log(response.smartphones);
-				}
-			);
+                response.inventory[i] = item;
+			});
 	};
 
-	var createSmartphones = function(smartphones) {
-		if(!angular.isObject(smartphones)) {
-			console.log("There are no smartphones");
-			response.smartphones = null;
+	var createInventory = function(inventory) {
+		if (!angular.isObject(inventory)) {
+			console.log("There is no inventory");
+			response.inventory = null;
 			return;
 		}
 
-		var count = (smartphones.length > 3) ? 3 : smartphones.length;
+		var count = (inventory.length > 3) ? 3 : inventory.length;
 
-		response.smartphones = {};
-    for(var i = 0; i < count; i++) {
-      setSmartphoneObj(smartphones[i]['device-name'], i);
-    }
+		response.inventory = {};
+        for (var i = 0; i < count; i++) {
+            setInventoryIndex(inventory[i], i);
+        }
+	};
+
+	var getDuration = function(itemLocation) {
+		if (!angular.isObject(itemLocation)) {
+			console.log("The item's inventory location is not valid");
+			response.inventory = null;
+			return;
+		}
+
+        var distance = Math.hypot(
+                    itemLocation.longitude - response.userLocation.longitude,
+                    itemLocation.latitude - response.userLocation.latitude);
+
+		console.log("The distance is " + distance);
+		if (distance <= 16) {
+		    return "1";
+		} else if (distance <= 32) {
+		    return "2";
+		} else if (distance <= 48) {
+		    return "3";
+		} else {
+		    return "4+";
+		}
 	};
 
 	return {
@@ -53,26 +71,27 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 				return;
 			};
 
-      var config = {
-        headers : {
-          'Content-Type': 'application/json'
-        }
-      };
+            var city = "Phoenix";
+            var state = "Arizona";
 
-			$http.post("http://localhost:8080/smartphone/constraint", constraints, config)
-				.then(
-					function (result) {
-            createSmartphones(result.data);
-					}
-        );
+			$http({
+			    url: "/smartphone/constraint",
+			    method: "POST",
+			    params: {"city": response.userLocation.city, "state": response.userLocation.state},
+			    data: constraints,
+			    header: {'Content-Type': 'application/json'}
+			    })
+				.then(function (result) {
+                    createInventory(result.data);
+                });
 		},
 
 		resetResponse: function() {
-      response.smartphones = null;
+		    response.inventory = null;
 		},
 
-		getSmartphones: function() {
-			return response.smartphones;
+		getInventory: function() {
+			return response.inventory;
 		},
 
 		getResponse: function() {
