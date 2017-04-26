@@ -1,9 +1,11 @@
 package com.unibeck;
 
 import com.unibeck.model.*;
+import com.unibeck.repository.CustomerRepository;
 import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
+import com.unibeck.security.EncryptAuthentication;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,24 +28,43 @@ import static com.unibeck.model.Percentiles.convertFromWithInt;
 @Component
 @Profile("prod")
 public class SeedDatabase implements CommandLineRunner {
+    private CustomerRepository customerRepository;
     private SmartphoneRepository smartphoneRepository;
     private InventoryRepository inventoryRepository;
     private LocationRepository locationRepository;
+    private EncryptAuthentication encryptAuthentication;
 
     @Autowired
-    public SeedDatabase(SmartphoneRepository smartphoneRepository,
+    public SeedDatabase(CustomerRepository customerRepository,
+                        SmartphoneRepository smartphoneRepository,
                         InventoryRepository inventoryRepository,
-                        LocationRepository locationRepository) {
+                        LocationRepository locationRepository,
+                        EncryptAuthentication encryptAuthentication) {
 
+        this.customerRepository = customerRepository;
         this.smartphoneRepository = smartphoneRepository;
         this.inventoryRepository = inventoryRepository;
         this.locationRepository = locationRepository;
+        this.encryptAuthentication = encryptAuthentication;
     }
 
     public void run(String... args) {
+        seedCustomers();
         seedLocation();
         seedSmartphones();
         seedInventory();
+    }
+
+    private void seedCustomers() {
+        Customer newCustomer = new Customer()
+                .withUsername("JonnyBoy")
+                .withPassword(encryptAuthentication.passwordEncoder().encode("JonnyBoy"));
+        customerRepository.save(newCustomer);
+
+        newCustomer = new Customer()
+                .withUsername("Rana")
+                .withPassword(encryptAuthentication.passwordEncoder().encode("Rana"));
+        customerRepository.save(newCustomer);
     }
 
     public void seedTables() {

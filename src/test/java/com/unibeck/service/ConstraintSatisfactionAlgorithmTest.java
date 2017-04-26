@@ -5,6 +5,7 @@ import com.unibeck.model.Brand;
 import com.unibeck.model.OS;
 import com.unibeck.model.Smartphone;
 import com.unibeck.model.UserConstraint;
+import com.unibeck.repository.CustomerRepository;
 import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
@@ -30,6 +31,8 @@ import static org.junit.Assert.assertEquals;
 public class ConstraintSatisfactionAlgorithmTest {
 
     @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
     private SmartphoneRepository smartphoneRepository;
     @Autowired
     private InventoryRepository inventoryRepository;
@@ -42,11 +45,11 @@ public class ConstraintSatisfactionAlgorithmTest {
 
     @Before
     public void setItUp() {
-        seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+        seed = new SeedDatabase(customerRepository, smartphoneRepository, inventoryRepository, locationRepository);
     }
 
     @Test
-    public void basicConstraintWithAndroid() throws Exception {
+    public void basicConstraintWithAndroid() {
         seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
@@ -59,8 +62,7 @@ public class ConstraintSatisfactionAlgorithmTest {
     }
 
     @Test
-    public void basicConstraintWithiOS() throws Exception {
-        SeedDatabase seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+    public void basicConstraintWithiOS() {
         seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(
@@ -73,7 +75,7 @@ public class ConstraintSatisfactionAlgorithmTest {
     }
 
     @Test
-    public void basicConstraintWithLowEndPhone() throws Exception {
+    public void basicConstraintWithLowEndPhone() {
         seed.seedTables();
 
         UserConstraint constraint = new UserConstraint(

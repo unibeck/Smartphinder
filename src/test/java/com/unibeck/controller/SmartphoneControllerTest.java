@@ -3,6 +3,7 @@ package com.unibeck.controller;
 import com.unibeck.SeedDatabase;
 import com.unibeck.controllers.SmartphoneController;
 import com.unibeck.model.*;
+import com.unibeck.repository.CustomerRepository;
 import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
@@ -29,6 +30,8 @@ import static org.junit.Assert.assertEquals;
 public class SmartphoneControllerTest {
 
     @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
     private SmartphoneRepository smartphoneRepository;
     @Autowired
     private InventoryRepository inventoryRepository;
@@ -42,7 +45,7 @@ public class SmartphoneControllerTest {
 
     @Before
     public void setItUp() {
-        seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+        seed = new SeedDatabase(customerRepository, smartphoneRepository, inventoryRepository, locationRepository);
 
         smartphoneController = new SmartphoneController(smartphoneService);
     }
@@ -71,7 +74,7 @@ public class SmartphoneControllerTest {
     }
 
     @Test
-    public void findSmartphonesWithConstraintSatisfaction() throws Exception {
+    public void findSmartphonesWithConstraintSatisfaction() {
         seed.seedTables();
         Location userLocation = locationRepository.findAll().stream().findAny().get();
 
@@ -86,7 +89,7 @@ public class SmartphoneControllerTest {
     }
 
     @Test
-    public void constraintSatisfactionWithBackTracking() throws Exception {
+    public void constraintSatisfactionWithBackTracking() {
         seed.seedTables();
         Location userLocation = locationRepository.findAll().stream().findAny().get();
 

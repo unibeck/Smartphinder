@@ -22,11 +22,12 @@ angular.module('SmartPhinder').controller('ResponseCtrl', ['$scope', '$http', 'R
         if ($scope.inventory[index].stock < 1) {
             return;
         }
-        $scope.inventory[index].stock--;
 
         ResponseFactory.buySmartphone(
                 $scope.inventory[index].smartphone.id,
                 $scope.inventory[index].location.city,
                 $scope.inventory[index].location.state);
+
+        $scope.inventory[index].stock--;
     }
 }]);

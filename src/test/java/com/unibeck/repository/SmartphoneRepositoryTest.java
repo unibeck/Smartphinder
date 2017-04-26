@@ -26,6 +26,8 @@ import static org.junit.Assert.assertEquals;
 public class SmartphoneRepositoryTest {
 
     @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
     private SmartphoneRepository smartphoneRepository;
     @Autowired
     private InventoryRepository inventoryRepository;
@@ -36,7 +38,7 @@ public class SmartphoneRepositoryTest {
 
     @Before
     public void setup() {
-        seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
+        seed = new SeedDatabase(customerRepository, smartphoneRepository, inventoryRepository, locationRepository);
     }
 
     @Test
@@ -68,14 +70,14 @@ public class SmartphoneRepositoryTest {
     }
 
     @Test
-    public void largerSmartphoneRepo() throws Exception {
+    public void largerSmartphoneRepo() {
         seed.seedTables();
 
         assertEquals(61, smartphoneRepository.count());
     }
 
     @Test
-    public void filteringBySmartphoneFieldWorks() throws Exception {
+    public void filteringBySmartphoneFieldWorks() {
         seed.seedTables();
 
         //We can use this test to hone in on the percentile, one fifth of the repository should be the size of each percentile

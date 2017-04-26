@@ -28,6 +28,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+
     compile 'org.postgresql:postgresql:9.4.1212'
     compile 'com.googlecode.json-simple:json-simple:1.1'
 
