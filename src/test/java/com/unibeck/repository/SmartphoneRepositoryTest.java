@@ -22,6 +22,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class SmartphoneRepositoryTest {
 
     @Autowired
@@ -36,8 +37,6 @@ public class SmartphoneRepositoryTest {
     @Before
     public void setup() {
         seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
-
-        smartphoneRepository.deleteAll();
     }
 
     @Test

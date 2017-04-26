@@ -1,6 +1,5 @@
 package com.unibeck.controller;
 
-
 import com.unibeck.SeedDatabase;
 import com.unibeck.controllers.SmartphoneController;
 import com.unibeck.model.*;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class SmartphoneControllerTest {
 
     @Autowired
@@ -42,8 +43,6 @@ public class SmartphoneControllerTest {
     @Before
     public void setItUp() {
         seed = new SeedDatabase(smartphoneRepository, inventoryRepository, locationRepository);
-
-        smartphoneRepository.deleteAll();
 
         smartphoneController = new SmartphoneController(smartphoneService);
     }
