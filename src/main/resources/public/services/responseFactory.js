@@ -92,10 +92,7 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 				return;
 			};
 
-			$http({
-			    url: "/logout",
-			    method: "POST"
-            });
+			response.customer = null;
 		},
 
         submitConstraints: function(constraints) {

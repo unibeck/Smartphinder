@@ -32,8 +32,8 @@
       </div>
 
       <md-content flex layout="column" layout-align="center center" style="background-color: #EEE">
-        <div ng-if="!customer" layout="row" layout-align="center center" style="width: 100%; height 100%">
-          <div login-directive></div>
+        <div ng-if="!customer" layout="row" layout-align="center center" style="height: 100%; width: 100%">
+          <div login-directive style="height: 100%"></div>
         </div>
         <div ng-if="customer" layout="row" layout-align="center center" style="width: 100%; height 100%">
           <div ng-if="showForm" form-directive></div>
