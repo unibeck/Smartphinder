@@ -1,11 +1,7 @@
 <link rel="stylesheet" href="../styles/response.css">
 <div layout="column" layout-align="center center" style="width: 100%; height 100%">
 
-  <div ng-if="loadingInventory">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-  </div>
-
-  <div layout="row" layout-align="center center" style="width: 100%; height 100%" ng-if="!loadingInventory">
+  <div layout="row" layout-align="center center" style="width: 100%; height 100%">
     <div ng-repeat="item in inventory" flex="25">
       <md-card style="padding: 8px">
         <div ng-style="{'background-image': 'url(' + item.imgUrl + ')'}" class="card-img"></div>

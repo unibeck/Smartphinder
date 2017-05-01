@@ -1,7 +1,7 @@
 angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($http) {
 
 	var response = {
-        inventory: null,
+        inventory: [],
         customer: null,
         userLocation: {
             "city": "Phoenix",
@@ -17,28 +17,30 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
     var searchUrl = 'https://www.googleapis.com/customsearch/v1?key='+
         key+'&cx='+cx+'&searchType=image&num=1&imgType=photo&q=';
 
-	var setInventoryIndex = function(item, i) {
-		$http.get(searchUrl + item.smartphone['device-name'])
+	var updateInventory = function(item) {
+		return $http.get(searchUrl + item.smartphone['device-name'])
 			.then(function (result) {
                 item.imgUrl = result.data.items[0].link;
                 item['transit-duration'] = getDuration(item.location);
 
-                response.inventory[i] = item;
+                return item;
 			});
 	};
 
 	var createInventory = function(inventory) {
 		if (!angular.isObject(inventory)) {
 			console.log("There is no inventory");
-			response.inventory = null;
+			response.inventory = [];
 			return;
 		}
 
 		var count = (inventory.length > 3) ? 3 : inventory.length;
 
-		response.inventory = {};
+		response.inventory = [];
         for (var i = 0; i < count; i++) {
-            setInventoryIndex(inventory[i], i);
+            updateInventory(inventory[i]).then(function (result) {
+                response.inventory.push(result);
+            });
         }
 	};
 
@@ -129,7 +131,7 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
         },
 
 		resetResponse: function() {
-		    response.inventory = null;
+		    response.inventory = [];
 		},
 
 		getInventory: function() {

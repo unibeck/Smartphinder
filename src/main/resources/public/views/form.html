@@ -1,5 +1,10 @@
 <div layout="column" layout-align="center center">
-  <div layout="row" layout-align="center center">
+
+  <div ng-if="loadingInventory">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <div ng-if="!loadingInventory" layout="row" layout-align="center center">
     <md-button ng-click="previousQuestion()" ng-disabled="currentQuestion == 0" class="md-fab md-primary" aria-label="Previous">
       <md-icon>chevron_left</md-icon>
     </md-button>

@@ -2,6 +2,7 @@ angular.module('SmartPhinder').controller('FormCtrl', ['$scope', 'ResponseFactor
 
   var numOfConstraints = 9;
   $scope.currentQuestion = 0;
+  $scope.loadingInventory = false;
 
   $scope.nextQuestion = function() {
     $scope.numOfValidConstraints = checkUserConstraint();
@@ -64,6 +65,7 @@ angular.module('SmartPhinder').controller('FormCtrl', ['$scope', 'ResponseFactor
   $scope.constraintsUsed = undefined;
 
   $scope.submitConstraints = function() {
+    $scope.loadingInventory = true;
     ResponseFactory.submitConstraints($scope.userConstraint);
   }
 

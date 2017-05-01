@@ -18,8 +18,8 @@ angular.module('SmartPhinder').controller('AppCtrl', ['$scope', 'ResponseFactory
 	$scope.showForm = true;
 	$scope.customer = $scope.responseFactory.getCustomer();
 
-	$scope.$watch('responseFactory.getInventory()', function(newVal) {
-		if (newVal) {
+	$scope.$watchCollection('responseFactory.getInventory()', function(newVal) {
+		if (newVal.length > 0) {
 			$scope.showForm = false;
 		} else {
 			$scope.showForm = true;
