@@ -2,6 +2,7 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 
 	var response = {
         inventory: null,
+        customer: null,
         userLocation: {
             "city": "Phoenix",
             "state": "Arizona",
@@ -64,7 +65,38 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 	};
 
 	return {
-		submitConstraints: function(constraints) {
+		signIn: function(customer) {
+			if (!angular.isObject(customer)) {
+				console.log("The customer provided is not valid");
+				return;
+			};
+
+			$http({
+			    url: "/login",
+			    method: "POST",
+			    headers: {
+			        'username': customer.username,
+			        'password': customer.password
+			    }
+            }).then(function (result) {
+                response.customer = result.data;
+                response.customer['status-code'] = result.status;
+            });
+		},
+
+		signOut: function() {
+			if (!angular.isObject(response.customer)) {
+				console.log("The current customer empty and thus cannot be signed out");
+				return;
+			};
+
+			$http({
+			    url: "/logout",
+			    method: "POST"
+            });
+		},
+
+        submitConstraints: function(constraints) {
 			if (!angular.isObject(constraints)) {
 				console.log("The constraints provided are not valid");
 				return;
@@ -102,6 +134,10 @@ angular.module('SmartPhinder').factory('ResponseFactory', ['$http', function($ht
 
 		getInventory: function() {
 			return response.inventory;
+		},
+
+        getCustomer: function() {
+			return response.customer;
 		},
 
 		getResponse: function() {

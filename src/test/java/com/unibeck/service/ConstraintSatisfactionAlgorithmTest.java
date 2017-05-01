@@ -10,6 +10,7 @@ import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
 import com.unibeck.services.ConstraintSatisfactionAlgorithm;
+import com.unibeck.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,13 +40,16 @@ public class ConstraintSatisfactionAlgorithmTest {
     @Autowired
     private LocationRepository locationRepository;
     @Autowired
+    private UserService userService;
+    @Autowired
     private ConstraintSatisfactionAlgorithm constraintSatisfactionAlgorithm;
 
     private SeedDatabase seed;
 
     @Before
     public void setItUp() {
-        seed = new SeedDatabase(customerRepository, smartphoneRepository, inventoryRepository, locationRepository);
+        seed = new SeedDatabase(
+                customerRepository, smartphoneRepository, inventoryRepository, locationRepository, userService);
     }
 
     @Test

@@ -5,7 +5,7 @@ import com.unibeck.repository.CustomerRepository;
 import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
-import com.unibeck.security.EncryptAuthentication;
+import com.unibeck.services.UserService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,20 +32,20 @@ public class SeedDatabase implements CommandLineRunner {
     private SmartphoneRepository smartphoneRepository;
     private InventoryRepository inventoryRepository;
     private LocationRepository locationRepository;
-    private EncryptAuthentication encryptAuthentication;
+    private UserService userService;
 
     @Autowired
     public SeedDatabase(CustomerRepository customerRepository,
                         SmartphoneRepository smartphoneRepository,
                         InventoryRepository inventoryRepository,
                         LocationRepository locationRepository,
-                        EncryptAuthentication encryptAuthentication) {
+                        UserService userService) {
 
         this.customerRepository = customerRepository;
         this.smartphoneRepository = smartphoneRepository;
         this.inventoryRepository = inventoryRepository;
         this.locationRepository = locationRepository;
-        this.encryptAuthentication = encryptAuthentication;
+        this.userService = userService;
     }
 
     public void run(String... args) {
@@ -55,20 +55,34 @@ public class SeedDatabase implements CommandLineRunner {
         seedInventory();
     }
 
+    public void seedTables() {
+        run("");
+    }
+
     private void seedCustomers() {
         Customer newCustomer = new Customer()
-                .withUsername("JonnyBoy")
-                .withPassword(encryptAuthentication.passwordEncoder().encode("JonnyBoy"));
+                .withDisplayName("Jonathan")
+                .withUsername("xXjonXx")
+                .withPassword(userService.passwordEncoder().encode("jon"));
         customerRepository.save(newCustomer);
 
         newCustomer = new Customer()
-                .withUsername("Rana")
-                .withPassword(encryptAuthentication.passwordEncoder().encode("Rana"));
+                .withDisplayName("Jed")
+                .withUsername("xXjedXx")
+                .withPassword(userService.passwordEncoder().encode("jed"));
         customerRepository.save(newCustomer);
-    }
 
-    public void seedTables() {
-        run("");
+        newCustomer = new Customer()
+                .withDisplayName("Sau")
+                .withUsername("xXsauXx")
+                .withPassword(userService.passwordEncoder().encode("sau"));
+        customerRepository.save(newCustomer);
+
+        newCustomer = new Customer()
+                .withDisplayName("Addison")
+                .withUsername("xXaddisonXx")
+                .withPassword(userService.passwordEncoder().encode("addison"));
+        customerRepository.save(newCustomer);
     }
 
     private void seedLocation() {

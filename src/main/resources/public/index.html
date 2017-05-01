@@ -17,17 +17,25 @@
 
   <body>
     <div layout="column" md-theme="default" ng-controller="AppCtrl" style="height: 100%">
-      <div class="header-background">
-        <div class="header-img"></div>
-        <div class="md-display-2 header-text">SmartPhinder</div>
+      <div class="header-background" layout="column" layout-align="space-between center">
+        <div>
+          <div class="md-display-2 header-text">SmartPhinder</div>
+          <p class="md-headline header-text">Team 3: Legends</p>
+        </div>
 
-        <div class="header-text" style="padding-top: 142px">
-          <p class="md-headline">Team 3: Legends</p>
+        <div layout="row" layout-align="center center" ng-if="customer" class="md-headline header-text" style="font-style: italic">
+          <h2>Hello {{customer.displayName}}</h2>
+          <md-button ng-click="signOut()" class="md-raised" style="margin-left: 32px">
+            Logout
+          </md-button>
         </div>
       </div>
 
       <md-content flex layout="column" layout-align="center center" style="background-color: #EEE">
-        <div layout="row" layout-align="center center" style="width: 100%; height 100%">
+        <div ng-if="!customer" layout="row" layout-align="center center" style="width: 100%; height 100%">
+          <div login-directive></div>
+        </div>
+        <div ng-if="customer" layout="row" layout-align="center center" style="width: 100%; height 100%">
           <div ng-if="showForm" form-directive></div>
           <div ng-if="!showForm" style="width: 100%; height 100%" response-directive></div>
         </div>
@@ -44,6 +52,9 @@
     <!-- SmartPhinder subcomponent dependencies -->
     <script src="../index.js"></script>
     <script src="../services/responseFactory.js"></script>
+
+    <script src="../controllers/loginController.js"></script>
+    <script src="../directives/loginDirective.js"></script>
 
     <script src="../controllers/formController.js"></script>
     <script src="../directives/formDirective.js"></script>

@@ -8,6 +8,7 @@ import com.unibeck.repository.InventoryRepository;
 import com.unibeck.repository.LocationRepository;
 import com.unibeck.repository.SmartphoneRepository;
 import com.unibeck.services.SmartphoneService;
+import com.unibeck.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,8 @@ public class SmartphoneControllerTest {
     @Autowired
     private LocationRepository locationRepository;
     @Autowired
+    private UserService userService;
+    @Autowired
     private SmartphoneService smartphoneService;
 
     private SmartphoneController smartphoneController;
@@ -45,7 +48,8 @@ public class SmartphoneControllerTest {
 
     @Before
     public void setItUp() {
-        seed = new SeedDatabase(customerRepository, smartphoneRepository, inventoryRepository, locationRepository);
+        seed = new SeedDatabase(
+                customerRepository, smartphoneRepository, inventoryRepository, locationRepository, userService);
 
         smartphoneController = new SmartphoneController(smartphoneService);
     }

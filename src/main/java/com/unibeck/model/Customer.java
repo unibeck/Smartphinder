@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -19,6 +16,10 @@ public class Customer implements UserDetails {
     private Long id;
 
     @NotNull
+    private String displayName;
+
+    @NotNull
+    @Column(unique = true)
     private String username;
 
     @NotNull
@@ -27,6 +28,15 @@ public class Customer implements UserDetails {
     @Override
     public List<GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList("ROLE_USER");
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public Customer withDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
     }
 
     public void setUsername(String username) {
@@ -49,6 +59,10 @@ public class Customer implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     @Override

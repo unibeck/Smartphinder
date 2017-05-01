@@ -4,8 +4,8 @@
 
 This is a full-stack application that was a school project, but also showcases a few skills. This project
 shows my familiarity with popular frameworks, language build patterns, decently clean code (though it could
-be improved), and testing. While this isn't a full-blown and fleshed out applications, it does touch many 
-facets of a would be production application. A very interesting addition to this application is a unique
+be improved), and testing. While this isn't a full-blown, production ready application - it does touch many 
+facets of a such an application. A very interesting addition to this application is a unique
 implementation of a constraint satisfaction based algorithm. I implore you to look into the algorithm 
 section along with the source code.
 

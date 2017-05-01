@@ -3,6 +3,7 @@ package com.unibeck.repository;
 import com.unibeck.SeedDatabase;
 import com.unibeck.model.*;
 
+import com.unibeck.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,12 +34,15 @@ public class SmartphoneRepositoryTest {
     private InventoryRepository inventoryRepository;
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private UserService userService;
 
     private SeedDatabase seed;
 
     @Before
     public void setup() {
-        seed = new SeedDatabase(customerRepository, smartphoneRepository, inventoryRepository, locationRepository);
+        seed = new SeedDatabase(
+                customerRepository, smartphoneRepository, inventoryRepository, locationRepository, userService);
     }
 
     @Test
